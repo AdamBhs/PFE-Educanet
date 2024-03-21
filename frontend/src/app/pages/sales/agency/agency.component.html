@@ -1,0 +1,43 @@
+
+<div class="da-content-banner">
+	<d-breadcrumb>
+	  <d-breadcrumb-item
+		><a routerLink="/">
+			Home
+		</a></d-breadcrumb-item
+	  >
+	  <d-breadcrumb-item>
+		Sales
+	  </d-breadcrumb-item>
+	  <d-breadcrumb-item>
+		Agency
+	  </d-breadcrumb-item>
+	</d-breadcrumb>
+	<div class="da-content-banner-title">
+		Agency Table
+	</div>
+	<div>
+		Your Page Related Description
+	</div>
+</div>
+
+<div class="da-content-wrapper">
+	<div class="da-content-card">
+		<d-data-table [dataSource]="basicDataSource" [scrollable]="true" [tableWidthConfig]="tableWidthConfig" [tableOverflowType]="'overlay'">
+			<thead dTableHead>
+			  <tr dTableRow>
+				<th dHeadCell *ngFor="let colOption of dataTableOptions.columns">{{ colOption.header }}</th>
+			  </tr>
+			</thead>
+			<tbody dTableBody>
+			  <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex">
+				<tr dTableRow>
+				  <td dTableCell *ngFor="let colOption of dataTableOptions.columns">
+					{{ colOption.fieldType === 'date' ? (rowItem[colOption.field] | i18nDate: 'short':false) : rowItem[colOption.field] }}
+				  </td>
+				</tr>
+			  </ng-template>
+			</tbody>
+		  </d-data-table>
+	</div>
+</div>

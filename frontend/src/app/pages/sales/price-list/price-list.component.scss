@@ -1,0 +1,18 @@
+@import "ng-devui/styles-var/devui-var.scss";
+@import "src/app/@shared/styles/common.scss";
+
+
+.da-content-card {
+    padding: 20px;
+    min-height: 260px;
+    height: auto;
+}
+
+.agency-title {
+    margin-top: 0px;
+}
+
+.row {
+    width: 200px;
+    user-select: none;
+}

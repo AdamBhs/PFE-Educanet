@@ -1,0 +1,20 @@
+@import "ng-devui/styles-var/devui-var.scss";
+@import "src/app/@shared/styles/common.scss";
+
+
+.da-content-banner,
+.da-content-wrapper {
+    user-select: none;
+}
+
+.client-code {
+    margin-top: 0;
+}
+
+.da-content-card {
+    padding: 20px;
+}
+
+.da-content-card input {
+    width: 400px;
+}
