@@ -15,6 +15,7 @@ const routes: Routes = [
   { path: 'customer-card', component: CustomerCardComponent },
   { path: 'total-customers', component: TotalCustomersComponent },
   { path: 'customer-archive', component: CustomerArchiveComponent },
+  { path: 'customer-card/:id', component: CustomerCardComponent }
 ];
 
 @NgModule({

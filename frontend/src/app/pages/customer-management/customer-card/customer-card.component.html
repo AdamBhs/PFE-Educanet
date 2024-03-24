@@ -23,7 +23,61 @@
 
 <div class="da-content-wrapper">
 	<div class="da-content-card">
-		<h4 class="client-code">Client Code</h4>
-		<input dTextInput placeholder="Please Enter" placeholder="Client code"/>
+		<form
+        dForm
+        ngForm
+        [dValidateRules]="{
+          message: 'The form verification failed, please check.'
+        }"
+        [layout]="verticalLayout"
+        #projectForm="dValidateRules"
+        (dSubmit)="submitForm($event)"
+        autocomplete="off"
+      >
+	  
+		<d-form-item class="d-form-item">
+			<d-form-label
+			[required]="true"
+			>Customer Code</d-form-label
+			>
+			<d-form-control>
+			<input
+				dTextInput
+				autocomplete="off"
+				name="customerCode"
+				placeholder="Customer Code"
+				[(ngModel)]="customerCode"
+				[dValidateRules]="{
+				validators: [{ required: true }],
+				asyncValidators: [
+					{
+					sameName: this.checkCode.bind(this),
+					message: 'Customer card does not exist.'
+					}
+				]
+				}"
+			/>
+			</d-form-control>
+		</d-form-item>
+		
+		<ng-container *ngIf="validCode === true">
+			Hello
+		</ng-container>
+		
+
+		<d-form-operation>
+			<d-button
+			  dLoading
+			  class="mr-element-spacing"
+			  circled="true"
+			  style="margin-right: 8px"
+			  dFormSubmit
+			  [showLoading]="projectForm.pending"
+			  [dFormSubmitData]="'submit-button'"
+			>
+			  Submit
+			</d-button>
+		</d-form-operation>
+	  </form>
 	</div>
 </div>

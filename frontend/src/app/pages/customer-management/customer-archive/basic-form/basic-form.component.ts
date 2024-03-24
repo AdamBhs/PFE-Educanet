@@ -37,7 +37,7 @@ export class BasicFormComponent {
     return range.every((_) => !!_);
   }
 
-  checkName(value) {
+  checkCode(value) {
     let res = false;
     if (this.existCustomerCard.indexOf(value) !== -1) {
       res = true;
