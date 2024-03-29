@@ -1,10 +1,56 @@
-
+<!-- <d-row>
+  <d-col [dSpan]="{ ss: 12, xs: 8 }">
+    <div class="da-content-wrapper">
+        <div class="da-content-card">
+          <div echarts [options]= "option_1"></div>
+        </div>
+    </div>
+  </d-col>
+  <d-col [dSpan]="{ ss: 12, xs: 8 }">
+    <div class="da-content-wrapper">
+        <div class="da-content-card">
+          <div echarts [options]= "option_1"></div>
+        </div>
+    </div>
+  </d-col>
+</d-row> -->
 <div class="da-content-wrapper">
-  <da-layout-row [daGutter]="[24, 24]">
-    <da-col-item [daSpan]="24" [daXs]="24">
-      <div class="da-content-card">
-      
-      </div>
-    </da-col-item>
-  </da-layout-row>
+    <d-row>
+          <div class="da-content-card">
+            <div class="da-content-title">Total Customers</div>
+            <d-col [dSpan]="{ ss: 12, xs: 6 }"><div echarts [options]= "option_1"></div></d-col>
+          </div>
+          
+          <div class="da-content-card">
+            <div class="da-content-title">Total Customers</div>
+            <d-col [dSpan]="{ ss: 12, xs: 6 }"><div echarts [options]= "option_2"></div></d-col>
+          </div>
+
+          <div class="da-content-card">
+            <div class="da-content-title">Total Customers</div>
+            <d-col [dSpan]="{ ss: 12, xs: 6 }">
+              <d-data-table [dataSource]="basicDataSource" [scrollable]="true" [tableWidthConfig]="tableWidthConfig" [tableOverflowType]="'overlay'">
+                <thead dTableHead>
+                  <tr dTableRow>
+                  <th dHeadCell *ngFor="let colOption of dataTableOptions.columns">{{ colOption.header }}</th>
+                  </tr>
+                </thead>
+                <tbody dTableBody>
+                  <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex">
+                  <tr dTableRow>
+                    <td dTableCell *ngFor="let colOption of dataTableOptions.columns">
+                    {{ colOption.fieldType === 'date' ? (rowItem[colOption.field] | i18nDate: 'short':false) : rowItem[colOption.field] }}
+                    </td>
+                  </tr>
+                  </ng-template>
+                </tbody>
+                </d-data-table>
+            </d-col>
+          </div>
+          
+        <div class="da-content-card two">
+          <div class="da-content-title">Total Customers</div>
+          <d-col [dSpan]="{ ss: 12, xs: 6 }"><div echarts [options]= "option_1"></div></d-col>
+        </div>
+    </d-row>
 </div>

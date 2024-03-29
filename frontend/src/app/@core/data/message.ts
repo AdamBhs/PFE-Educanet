@@ -1,3 +1,3 @@
 export class message {
-    message!: string;
+    message!: JSON;
 }

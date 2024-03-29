@@ -1,11 +1,39 @@
 @import "ng-devui/styles-var/devui-var.scss";
 @import "src/app/@shared/styles/common.scss";
 
+.da-content-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .da-content-card {
-  height: 300px;
-  padding: 24px;
+  height: auto;
+  width: calc((100% - 20px) /3);
+}
+
+
+.d-row {
+  width: 100%;
+  gap: 10px;
+}
+
+
+.two {
+  width: 100%;
+}
+
+.da-content-title {
+  padding: 12px;
+  font-size: 17px;
 }
 
 p {
   font-size: $devui-font-size-price;
 }
+
+@media screen and (max-width: 500px) {
+  .da-content-card {
+    width: 100%;
+  }
+}
+

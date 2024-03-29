@@ -4,7 +4,16 @@ import { UserComponent } from './user.component';
 import { CenterComponent } from './center/center.component';
 import { SettingsComponent } from './settings/settings.component';
 
-const routes: Routes = [{ path: '', component: UserComponent, children: [], }, { path: 'center', component: CenterComponent }, { path: 'settings', component: SettingsComponent }];
+const routes: Routes = [
+  { 
+   path: '',
+   component: UserComponent,
+   children: [
+      { path: 'center', component: CenterComponent },
+      { path: 'settings', component: SettingsComponent }
+    ],
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

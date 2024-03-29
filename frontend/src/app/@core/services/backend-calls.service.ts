@@ -12,7 +12,7 @@ export class BackendCallsService {
     private http: HttpClient
   ) { }
 
-  getCustomerCode(code:String):Observable<message> {
+  getCustomerCode(code:any):Observable<message> {
     return this.http.get<message>("http://localhost:8080/getCustomerCode/" + code);
   }
 }

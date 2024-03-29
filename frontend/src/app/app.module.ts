@@ -9,6 +9,7 @@ import { CoreModule } from './@core/core.module';
 import { SharedModule } from './@shared/shared.module';
 import { Observable, of } from 'rxjs'; 
 import { I18N } from '../config/language-config';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 class I18NLoader implements TranslateLoader {
   getTranslation(lang: 'zh-cn' | 'en-us'): Observable<Object> {
@@ -30,7 +31,8 @@ class I18NLoader implements TranslateLoader {
         provide: TranslateLoader,
         useClass: I18NLoader
       }
-    })
+    }),
+
   ],
   providers: [],
   bootstrap: [AppComponent],
