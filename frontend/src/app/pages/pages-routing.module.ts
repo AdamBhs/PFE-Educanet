@@ -21,10 +21,11 @@ const routes: Routes = [
           m => m.CustomerManagementModule
           )
       },
-      { path: 'sales', loadChildren: () => import('./sales/sales.module').then(m => m.SalesModule) },
       { path: 'marketing', loadChildren: () => import('./marketing/marketing.module').then(m => m.MarketingModule) },
       { path: 'operations-management', loadChildren: () => import('./operations-management/operations-management.module').then(m => m.OperationsManagementModule) },
       { path: 'user', loadChildren: () => import('./user/user.module').then(m => m.UserModule) },
+      { path: 'resourcess', loadChildren: () => import('./resourcess/resourcess.module').then(m => m.ResourcessModule) },
+      { path: 'finances', loadChildren: () => import('./finances/finances.module').then(m => m.FinancesModule) },
       {
         path: '',
         redirectTo: 'getting-started',
@@ -36,6 +37,8 @@ const routes: Routes = [
       }
     ]
   },
+  
+  
   
   
   

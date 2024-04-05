@@ -4,19 +4,16 @@ import { OperationsManagementRoutingModule } from './operations-management-routi
 import { OperationsManagementComponent } from './operations-management.component';
 import { SharedModule } from 'src/app/@shared/shared.module';
 import { OperationsComponent } from './operations/operations.component';
-import { EquipementComponent } from './equipement/equipement.component';
-import { ProductionComponent } from './production/production.component';
-import { LaboratoryComponent } from './laboratory/laboratory.component';
+
 import { BasicFormOperModule } from './operations/basic-form/basic-form.module';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 
 @NgModule({
   declarations: [
     OperationsManagementComponent,
     OperationsComponent,
-    EquipementComponent,
-    ProductionComponent,
-    LaboratoryComponent
+    NotificationsComponent,
   ],
   imports: [
     SharedModule,

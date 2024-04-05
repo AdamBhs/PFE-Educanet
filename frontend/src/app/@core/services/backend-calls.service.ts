@@ -15,4 +15,8 @@ export class BackendCallsService {
   getCustomerCode(code:any):Observable<message> {
     return this.http.get<message>("http://localhost:8080/getCustomerCode/" + code);
   }
+
+  getCustomers():Observable<any> {
+    return this.http.get<any>("http://localhost:8080/getCustomers");
+  }
 }

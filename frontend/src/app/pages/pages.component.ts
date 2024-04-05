@@ -128,24 +128,34 @@ export class PagesComponent implements OnInit {
         menuIcon: "icon icon-company-member", 
       },
       {
-        title: 'Sales',
+        title: 'Finances',
         open: false,
         children: [
-          { title: 'Price List', link: '/pages/sales/price-list' },
-          { title: 'Caisse', link: '/pages/sales/caisse' },
-          { title: 'Sell Points', link: '/pages/sales/sell-points' },
-          { title: 'Agency', link: '/pages/sales/agency' },
+          { title: 'Price List', link: '/pages/finances/price-list' },
+          { title: 'Caisse', link: '/pages/finances/caisse' },
+          { title: 'Invoices', link: '/pages/finances/invoices' },
         ],
-        link: "/pages/sales",
-        menuIcon: "icon icon-line-chart", 
+        link: "/pages/finances",
+        menuIcon: "icon icon-fee-center", 
       },
       {
-        title: 'Marketing',
+        title: "Resources",
         open: false,
         children: [
-          { title: 'Promotions', link: '/pages/marketing/promotions' },
-          { title: 'Invoice', link: '/pages/marketing/invoice' },
-          { title: 'Percentage', link: '/pages/marketing/percentage' },
+          
+          { title: 'Agency', link: '/pages/resourcess/agency' },
+          { title: 'Laboratoire', link: '/pages/resourcess/laboratoire' },
+          { title: 'Equipement', link: '/pages/resourcess/equipement' },
+        ],
+        link: "/pages/resourcess",
+        menuIcon: "icon icon-archived-item", 
+      },
+      {
+        title: 'Promotions',
+        open: false,
+        children: [
+          { title: 'Promotion', link: '/pages/marketing/promotions' },
+          { title: 'Promotion client', link: '/pages/marketing/invoice' },
         ],
         link: "/pages/marketing",
         menuIcon: "icon icon-desk-notice", 
@@ -155,13 +165,12 @@ export class PagesComponent implements OnInit {
         open: false,
         children: [
           { title: 'Operations', link: '/pages/operations-management/operations' },
-          { title: 'Equipement', link: '/pages/operations-management/equipement' },
-          { title: 'Production', link: '/pages/operations-management/production' },
-          { title: 'Laboratory', link: '/pages/operations-management/laboratory' },
+          { title: 'Notifications', link: '/pages/operations-management/notifications' },
         ],
         link: "/pages/operations-management",
         menuIcon: "icon icon-setting", 
       },
+      
       {
         title: 'User',
         open: false,

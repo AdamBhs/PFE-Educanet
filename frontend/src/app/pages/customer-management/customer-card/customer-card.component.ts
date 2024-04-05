@@ -13,7 +13,7 @@ import { BackendCallsService } from 'src/app/@core/services/backend-calls.servic
 export class CustomerCardComponent implements OnInit {
   customerCode!:any;
   validCode = false;
-  existCustomerCard = ['123', '124'];
+  existCustomerCard!:any;
 
   verticalLayout: FormLayout = FormLayout.Vertical;
 
@@ -22,7 +22,12 @@ export class CustomerCardComponent implements OnInit {
     ) {}
 
   ngOnInit(): void {
-    
+    this.backendService.getCustomers().subscribe(
+      (customers) => {
+        this.existCustomerCard = customers.map(customer => customer.codeClient.toString());
+        
+      }
+    )
   }
 
 
@@ -39,13 +44,18 @@ export class CustomerCardComponent implements OnInit {
   submitForm({ valid, directive, data, errors }) {
     if (valid) {
       this.validCode = true;
-
-      this.backendService.getCustomerCode(this.customerCode).subscribe(
-        (data) => {
-          
-          console.log(data);
-        }
-      )
+      
+      // this.backendService.getCustomerCode(this.customerCode).subscribe(
+      //   (data) => {
+      //     console.log(data);
+      //   }
+      // )
+      
+      //  this.backendService.getCustomers().subscribe(
+      //   (data) => {
+      //     console.log(data);
+      //   }
+      // )
 
     } else {
       this.validCode = false;
