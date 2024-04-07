@@ -4,8 +4,15 @@ import { delay } from 'rxjs/operators';
 
 export interface Item {
   ArticleName?: string;
-  ArticleType?: string;
-  ArticlePrice?: string;
+  Price?: string;
+  TotalQuantity?: string;
+  TVA?: string;
+  HT?: string;
+  Fine?: string;
+  TotalAmount?: string;
+  PaymentType?: string;
+  Date?: any;
+
   assignee?: string;
   status?: string;
   timeline?: string;
@@ -14,6 +21,7 @@ export interface Item {
   children?: any;
   chosen?: boolean;
   $isChildTableOpen?: boolean;
+
 }
 
 export interface ListPager {
@@ -25,14 +33,24 @@ export interface ListPager {
 export class ListDataService {
   public basicData: Item[] = [
     {
-      ArticleType: '',
-      ArticleName: 'Yriqtjdjd Omvqxe Xxlfgjtnj Hsyf Qecu',
-      ArticlePrice: '65',
+      Price: '14',
+      ArticleName: 'Yriqtjdjd',
+      TotalQuantity: '65',
+      TotalAmount: '102',
+      TVA: '2',
+      HT: '5',
+      PaymentType: 'Carte',
+      Date: "2024-04-06"
     },
     {
-      ArticleType: '',
-      ArticleName: 'Yriqtjdjd Omvqxe Xxlfgjtnj Hsyf Qecu',
-      ArticlePrice: '15',
+      Price: '15',
+      ArticleName: 'Yriqtjdjd',
+      TotalQuantity: '15',
+      TotalAmount: '102',
+      TVA: '2',
+      HT: '7',
+      PaymentType: 'Carte',
+      Date: '2024-04-15'
     },
   ];
 

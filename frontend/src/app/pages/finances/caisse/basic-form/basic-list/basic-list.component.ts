@@ -1,6 +1,7 @@
 import {
   ChangeDetectorRef,
   Component,
+  Input,
   OnInit,
   TemplateRef,
   ViewChild,
@@ -16,6 +17,7 @@ import { ListDataService, Item } from './list-data.service';
   styleUrls: ['./basic-list.component.scss'],
 })
 export class BasicListComponent implements OnInit {
+  @Input("DateInterval") dateInterval?:any;
   filterAreaShow = false;
 
   options = ['normal', 'borderless', 'bordered'];
@@ -44,7 +46,27 @@ export class BasicListComponent implements OnInit {
       width: '200px',
     },
     {
-      field: 'Actions',
+      field: 'TotalQuantity',
+      width: '200px'
+    },
+    {
+      field: 'TotalAmount',
+      width: '200px',
+    },
+    {
+      field: 'TVA',
+      width: '200px',
+    },
+    {
+      field: 'HT',
+      width: '100px',
+    },
+    {
+      field: 'PaymentType',
+      width: '100px',
+    },
+    {
+      field: 'Date',
       width: '100px',
     },
   ];
@@ -56,8 +78,8 @@ export class BasicListComponent implements OnInit {
     items: [
 
       {
-        label: 'ArticleName',
-        prop: 'ArticleName',
+        label: 'TotalQuantity',
+        prop: 'TotalQuantity',
         type: 'input',
         required: true,
         rule: {
@@ -97,12 +119,31 @@ export class BasicListComponent implements OnInit {
 
   ngOnInit() {
     this.getList();
+    
+    setTimeout(() => {
+      console.log(this.basicDataSource);
+    }, 3000);
+    setTimeout(() => {
+      this.basicDataSource.pop()
+    }, 4000);
+    setTimeout(() => {
+      console.log(this.basicDataSource);
+    }, 5000);
   }
 
   search() {
     this.getList();
   }
 
+  isDateBetweenInterval(value: string, interval: [string, string]): boolean {
+    const startDate = new Date(interval[0]);
+    const endDate = new Date(interval[1]);
+    const targetDate = new Date(value);
+  
+    return targetDate >= startDate && targetDate <= endDate;
+  }
+  
+// lazim tchouf kifash kol ma tinzl 3al submit button y3awed ya3ml filter mara o5ra
   getList() {
     this.busy = this.listDataService
       .getListData(this.pager)
@@ -113,21 +154,6 @@ export class BasicListComponent implements OnInit {
       });
   }
 
-  editRow(row, index) {
-    this.editRowIndex = index;
-    this.formData = row;
-    this.editForm = this.dialogService.open({
-      id: 'edit-dialog',
-      width: '600px',
-      maxHeight: '600px',
-      title: 'Editor',
-      showAnimate: false,
-      contentTemplate: this.EditorTemplate,
-      backdropCloseable: true,
-      onClose: () => {},
-      buttons: [],
-    });
-  }
 
   deleteRow(index) {
     const results = this.dialogService.open({

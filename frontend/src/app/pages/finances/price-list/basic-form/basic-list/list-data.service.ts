@@ -6,6 +6,7 @@ export interface Item {
   ArticleName?: string;
   ArticleType?: string;
   ArticlePrice?: string;
+  
   assignee?: string;
   status?: string;
   timeline?: string;

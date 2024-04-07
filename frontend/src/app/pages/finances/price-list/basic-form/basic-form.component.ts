@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { FormLayout } from 'ng-devui';
-import { ListDataService } from './list-data.service';
 
 @Component({
   selector: 'da-basic-form',
@@ -11,12 +10,13 @@ import { ListDataService } from './list-data.service';
 })
 export class BasicFormComponent {
 
-  constructor(private listDataService: ListDataService ) { }
+  constructor() { }
 
   projectFormData = {
     ArticleType: '',
     ArticleName: '',
     ArticlePrice: '',
+    Submited: false,
   };
 
   verticalLayout: FormLayout = FormLayout.Vertical;
@@ -50,7 +50,7 @@ export class BasicFormComponent {
 
   submitProjectForm({ valid, directive, data, errors }) {
     if (valid) {
-      this.listDataService.basicData.push(this.projectFormData);
+      this.projectFormData.Submited = true;
     } else {
       // error tip
     }

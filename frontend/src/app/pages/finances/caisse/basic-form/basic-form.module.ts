@@ -5,7 +5,6 @@ import { SelectModule, CheckBoxModule, DatepickerModule } from 'ng-devui';
 import { SharedModule } from 'src/app/@shared/shared.module';
 import { BasicListModule } from './basic-list/basic-list.module';
 
-
 @NgModule({
   declarations: [BasicFormComponent],
   imports: [
@@ -18,4 +17,4 @@ import { BasicListModule } from './basic-list/basic-list.module';
   ],
   exports: [BasicFormComponent],
 })
-export class BasicFormModule {}
+export class BasicFormCaisModule {}
