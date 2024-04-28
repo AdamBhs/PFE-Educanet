@@ -1,2 +1,9 @@
 @import "ng-devui/styles-var/devui-var.scss";
 @import "src/app/@shared/styles/common.scss";
+
+.da-content-card {
+    min-height: 260px;
+    height: auto;
+}
+
+

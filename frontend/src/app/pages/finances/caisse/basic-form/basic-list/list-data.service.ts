@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Observable, of as observableOf } from 'rxjs';
 import { delay } from 'rxjs/operators';
+import { BackendCallsService } from 'src/app/@core/services/backend-calls.service';
 
 export interface Item {
   ArticleName?: string;
   Price?: string;
   TotalQuantity?: string;
+  TotalAmount?: string;
   TVA?: string;
   HT?: string;
-  Fine?: string;
-  TotalAmount?: string;
   PaymentType?: string;
   Date?: any;
 
@@ -31,28 +31,15 @@ export interface ListPager {
 
 @Injectable()
 export class ListDataService {
-  public basicData: Item[] = [
-    {
-      Price: '14',
-      ArticleName: 'Yriqtjdjd',
-      TotalQuantity: '65',
-      TotalAmount: '102',
-      TVA: '2',
-      HT: '5',
-      PaymentType: 'Carte',
-      Date: "2024-04-06"
-    },
-    {
-      Price: '15',
-      ArticleName: 'Yriqtjdjd',
-      TotalQuantity: '15',
-      TotalAmount: '102',
-      TVA: '2',
-      HT: '7',
-      PaymentType: 'Carte',
-      Date: '2024-04-15'
-    },
-  ];
+
+  constructor(
+    private backendService: BackendCallsService
+  ) {
+    
+  }
+  public projectFormData: any;
+  private numAgence: any;
+  public submit: boolean = false;
 
   private pagerList(data, pager) {
     return data.slice(
@@ -61,10 +48,78 @@ export class ListDataService {
     );
   }
 
+  getNumAgence(data: any) {
+    this.numAgence = data;
+  }
+    
+  getAttributeData(data: any) {
+    this.projectFormData = data;
+    this.submit = this.projectFormData.Submited;
+  }
+
   getListData(pager: ListPager): Observable<any> {
-    return observableOf({
-      pageList: this.pagerList(this.basicData, pager),
-      total: this.basicData.length,
-    }).pipe(delay(1000));
+
+    const observable = new Observable((observer) => {
+      this.backendService.getCaisseData(
+        this.numAgence
+      ).subscribe(
+        (datas) => {
+          const Caisse = datas.map(data => ({
+            Price: data.Price,
+            ArticleName: data.ArticleName,
+            TotalQuantity: data.TotalQuantity,
+            TotalAmount: data.TotalAmount,
+            TVA: data.TVA,
+            HT: data.HT,
+            PaymentType: data.PaymentType,
+            Date: data.Date
+          }));
+
+          observer.next({
+            pageList: this.pagerList(Caisse, pager),
+            total: Caisse.length,
+          });
+          observer.complete();
+        },
+        (error) => {
+          observer.error(error);
+        }
+      );
+    });
+    return observable;
+  }
+
+  getListDataByDate(pager: ListPager): Observable<any> {
+
+    const observable = new Observable((observer) => {
+      this.backendService.getCaisseDataByDate(
+        this.numAgence,
+        this.projectFormData.intervalTime[0],
+        this.projectFormData.intervalTime[1]
+      ).subscribe(
+        (datas) => {
+          const Caisse = datas.map(data => ({
+            Price: data.Price,
+            ArticleName: data.ArticleName,
+            TotalQuantity: data.TotalQuantity,
+            TotalAmount: data.TotalAmount,
+            TVA: data.TVA,
+            HT: data.HT,
+            PaymentType: data.PaymentType,
+            Date: data.Date
+          }));
+
+          observer.next({
+            pageList: this.pagerList(Caisse, pager),
+            total: Caisse.length,
+          });
+          observer.complete();
+        },
+        (error) => {
+          observer.error(error);
+        }
+      );
+    });
+    return observable;
   }
 }

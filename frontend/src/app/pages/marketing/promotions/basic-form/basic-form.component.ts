@@ -28,6 +28,14 @@ export class BasicFormComponent {
     { id: '2', name: 'Bazzano' },
     { id: '3', name: 'Modena' },
     { id: '4', name: 'Soliera' },
+    { id: '4', name: 'Soliera' },
+    { id: '4', name: 'Soliera' },
+    { id: '4', name: 'Soliera' },
+    { id: '4', name: 'Soliera' },
+    { id: '4', name: 'Soliera' },
+    { id: '4', name: 'Soliera' },
+    { id: '4', name: 'Soliera' },
+    { id: '4', name: 'Soliera' },
   ];
 
   getValue(value) {

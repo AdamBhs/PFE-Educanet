@@ -21,9 +21,10 @@
         <d-form-control>
           <d-select
             [options]="AgencyOptions"
-            [(ngModel)]="projectFormData.AgencyName"
+            [(ngModel)]="projectFormData.nameAgence"
             [name]="'AgencyName'"
             [placeholder]="'Select Agency'"
+            (valueChange)="onSelectionChange($event)"
             [filterKey]="'name'"
             [valueKey]="'name'"
             [allowClear]="true"
@@ -32,39 +33,15 @@
         </d-form-control>
       </d-form-item>
 
-        <d-form-item>
-          <d-form-label [required]="true">date interval</d-form-label>
-          <d-form-control>
-            <div class="devui-input-group devui-dropdown-origin">
-              <input
-                class="devui-input devui-form-control"
-                placeholder="y/MM/dd  -  y/MM/dd"
-                name="dp"
-                [(ngModel)]="projectFormData.projectCycleTime"
-                (click)="dateRangePicker.toggle()"
-                autocomplete="off"
-                dDateRangePicker
-                #dateRangePicker="dateRangePicker"
-                (selectedRangeChange)="getValue($event)"
-                [hideOnRangeSelected]="true"
-                [dValidateRules]="[{ required: true }]"
-              />
-              <div
-                *ngIf="everyRange(projectFormData.projectCycleTime)"
-                class="devui-input-group-addon close-icon-wrapper"
-                (click)="dateRangePicker.clearAll()"
-              >
-                <i class="icon icon-close"></i>
-              </div>
-              <div
-                class="devui-input-group-addon"
-                (click)="dateRangePicker.toggle()"
-              >
-                <i class="icon icon-calendar"></i>
-              </div>
-            </div>
-          </d-form-control>
-        </d-form-item>
+
+      <d-form-item>
+        <d-form-label [required]="true">date interval</d-form-label>
+        <d-form-control>
+          <d-range-type-picker [ProjectFormData]="projectFormData"></d-range-type-picker>
+        </d-form-control>
+      </d-form-item>
+    
+      
 
         <d-form-operation>
           <d-button
@@ -83,8 +60,8 @@
 
 </form>
 
-<ng-container *ngIf="isProjectCycleTimeNull() && projectFormData.AgencyName!=null && projectFormData.Submited === true">
-  <da-basic-list [DateInterval]="intervalTime"></da-basic-list>
+<ng-container *ngIf="projectFormData.nameAgence !== '' ">
+  <da-basic-list ></da-basic-list>
 </ng-container>
 
 

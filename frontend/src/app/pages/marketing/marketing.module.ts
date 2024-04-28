@@ -21,7 +21,7 @@ import { BasicListModule } from './promotions/basic-form/basic-list/basic-list.m
     SharedModule,
     MarketingRoutingModule,
     BasicFormPromModule,
-    BasicListModule
+  
   ],
   providers: [],
 })

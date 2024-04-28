@@ -17,7 +17,6 @@ import { ListDataService, Item } from './list-data.service';
   styleUrls: ['./basic-list.component.scss'],
 })
 export class BasicListComponent implements OnInit {
-  @Input("DateInterval") dateInterval?:any;
   filterAreaShow = false;
 
   options = ['normal', 'borderless', 'bordered'];
@@ -73,27 +72,6 @@ export class BasicListComponent implements OnInit {
 
   basicDataSource: Item[] = [];
 
-  formConfig: FormConfig = {
-    layout: FormLayout.Horizontal,
-    items: [
-
-      {
-        label: 'TotalQuantity',
-        prop: 'TotalQuantity',
-        type: 'input',
-        required: true,
-        rule: {
-          validators: [
-            { required: true },
-          ],
-          
-        },
-      },
-      
-    ],
-    labelSize: '',
-  };
-
   formData = {};
 
   editForm = null;
@@ -119,39 +97,30 @@ export class BasicListComponent implements OnInit {
 
   ngOnInit() {
     this.getList();
-    
-    setTimeout(() => {
-      console.log(this.basicDataSource);
-    }, 3000);
-    setTimeout(() => {
-      this.basicDataSource.pop()
-    }, 4000);
-    setTimeout(() => {
-      console.log(this.basicDataSource);
-    }, 5000);
   }
 
   search() {
     this.getList();
   }
 
-  isDateBetweenInterval(value: string, interval: [string, string]): boolean {
-    const startDate = new Date(interval[0]);
-    const endDate = new Date(interval[1]);
-    const targetDate = new Date(value);
-  
-    return targetDate >= startDate && targetDate <= endDate;
-  }
-  
-// lazim tchouf kifash kol ma tinzl 3al submit button y3awed ya3ml filter mara o5ra
   getList() {
-    this.busy = this.listDataService
-      .getListData(this.pager)
-      .subscribe((res) => {
-        const data = JSON.parse(JSON.stringify(res.pageList));
-        this.basicDataSource = data;
-        this.pager.total = res.total;
-      });
+    if(this.listDataService.submit === false) {
+      this.busy = this.listDataService
+        .getListData(this.pager)
+        .subscribe((res) => {
+          const data = JSON.parse(JSON.stringify(res.pageList));
+          this.basicDataSource = data;
+          this.pager.total = res.total;
+        });
+    } else {
+      this.busy = this.listDataService
+        .getListDataByDate(this.pager)
+        .subscribe((res) => {
+          const data = JSON.parse(JSON.stringify(res.pageList));
+          this.basicDataSource = data;
+          this.pager.total = res.total;
+        });
+    }
   }
 
 
@@ -207,13 +176,4 @@ export class BasicListComponent implements OnInit {
     this.getList();
   }
 
-  onSubmitted(e) {
-    this.editForm.modalInstance.hide();
-    this.basicDataSource.splice(this.editRowIndex, 1, e);
-  }
-
-  onCanceled() {
-    this.editForm.modalInstance.hide();
-    this.editRowIndex = -1;
-  }
 }

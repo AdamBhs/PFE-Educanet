@@ -49,7 +49,7 @@
                   <span
                     [title]="cellItem"
                     class="over-flow-ellipsis"
-                    [style.width]="'300px'"
+                    [style.width]="'100px'"
                   >
                     {{ cellItem }}
                   </span>
@@ -79,7 +79,7 @@
                       icon="icon-delete"
                       bsStyle="text-dark"
                       title="delete"
-                      (click)="deleteRow(rowIndex)"
+                      (click)="deleteRow(rowItem, rowIndex)"
                     ></d-button>
                   </div>
                 </ng-template>

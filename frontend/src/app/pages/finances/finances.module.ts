@@ -8,19 +8,20 @@ import { DataTableModule } from 'ng-devui';
 import { InvoicesComponent } from './invoices/invoices.component';
 import { PriceListModule } from './price-list/price-list.module';
 import { CaisseModule } from './caisse/caisse.module';
+import { InvoicesModule } from './invoices/invoices.module';
 
 
 @NgModule({
   declarations: [
     FinancesComponent,
-    InvoicesComponent
   ],
   imports: [
     SharedModule,
     FinancesRoutingModule,
     PriceListModule,
     DataTableModule,
-    CaisseModule
+    CaisseModule,
+    InvoicesModule
   ]
 })
 export class FinancesModule { }

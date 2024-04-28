@@ -1,42 +1,56 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { FormLayout } from 'ng-devui';
+import { BackendCallsService } from 'src/app/@core/services/backend-calls.service';
+import { ListDataService } from './basic-list/list-data.service';
+import { BasicListComponent } from './basic-list/basic-list.component';
 
 @Component({
   selector: 'da-basic-form',
   templateUrl: './basic-form.component.html',
   styleUrls: ['./basic-form.component.scss'],
 })
-export class BasicFormComponent {
+export class BasicFormComponent{
+  @ViewChild(BasicListComponent) basicList: BasicListComponent;
+
+  intervalTime: [any, any];
+  existCustomerCard!:any;
+  listCustomerArchive: any[] = [];
+  isDateNull: any = false;
+
   projectFormData = {
     CustomerCode: '',
-    projectOwner: null,
-    AgencyName: null,
-    projectCycleTime: [null, null],
+    numAgence: null,
+    nameAgence: null,
+    intervalTime: [null, null],
+    operationCycleTime: [null, null],
+    Submited: false
   };
 
   verticalLayout: FormLayout = FormLayout.Vertical;
 
-  existCustomerCard = ['123', '124']; // check if the customer Code exist or not
-
-  
+  constructor(
+    private backendService: BackendCallsService,
+    private listDataService: ListDataService
+  ) {}
 
   AgencyOptions = [
-    { id: '1', name: 'Carpi' },
-    { id: '2', name: 'Bazzano' },
+    { id: '1', name: 'Bazzano' },
+    { id: '2', name: 'Carpi' },
     { id: '3', name: 'Modena' },
     { id: '4', name: 'Soliera' },
   ];
 
-  getValue(value) {
-    console.log(value);
+  onSelectionChange(data) {
+    this.projectFormData.numAgence = data["id"];
+    this.backendService.getCustomersByAgence(this.projectFormData.nameAgence).subscribe(
+      (customers) => {
+        this.existCustomerCard = customers.map(customer => customer.codeClient.toString());
+      }
+    )
   }
-
-  everyRange(range) {
-    return range.every((_) => !!_);
-  }
-
+  
   checkCode(value) {
     let res = false;
     if (this.existCustomerCard.indexOf(value) !== -1) {
@@ -45,22 +59,22 @@ export class BasicFormComponent {
     return of(res).pipe(delay(500));
   }
 
-  validateDate(value): Observable<string | null> {
-    let message = null;
-    
-    message = {
-      'en-us':
-        'The task queue on the current execution day (Tuesday) is full.',
-    };
-      
-    return of(message).pipe(delay(300));
+  isOperationCycleTimeNull(): boolean {
+    this.isDateNull = !this.projectFormData.operationCycleTime.every(element => element === null);
+
+    return !this.projectFormData.operationCycleTime.every(element => element === null);
   }
 
+
   submitProjectForm({ valid, directive, data, errors }) {
-    if (valid) {
-      // do something
+    if (valid && this.isDateNull) {
+      this.projectFormData.Submited = true;
+      this.listDataService.getAttributeData(this.projectFormData);
+      if (this.basicList) {
+        this.basicList.reset();  
+      }
     } else {
-      // error tip
+      this.projectFormData.Submited = false;
     }
   }
 }

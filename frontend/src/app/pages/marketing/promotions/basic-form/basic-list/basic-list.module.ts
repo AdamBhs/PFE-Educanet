@@ -9,7 +9,6 @@ import {
   TagsModule,
 } from 'ng-devui';
 import { SharedModule } from 'src/app/@shared/shared.module';
-import { ListDataService } from './list-data.service';
 import { AdminFormModule } from 'src/app/@shared/components/admin-form';
 
 @NgModule({
@@ -25,6 +24,6 @@ import { AdminFormModule } from 'src/app/@shared/components/admin-form';
     PaginationModule,
   ],
   exports: [BasicListComponent],
-  providers: [ListDataService],
+  providers: [],
 })
 export class BasicListModule {}

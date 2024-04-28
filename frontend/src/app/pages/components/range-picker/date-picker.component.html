@@ -1,0 +1,28 @@
+<div class="devui-input-group devui-dropdown-origin">
+    <input
+      class="devui-input devui-form-control"
+      placeholder="y/MM/dd  -  y/MM/dd"
+      name="dp"
+      [(ngModel)]="projectFormData.operationCycleTime"
+      (click)="dateRangePicker.toggle()"
+      autocomplete="off"
+      dDateRangePicker
+      #dateRangePicker="dateRangePicker"
+      (selectedRangeChange)="getValue()"
+      [hideOnRangeSelected]="true"
+      [dValidateRules]="{ validators: [{ required: true }]}"
+    />
+    <div
+      *ngIf="everyRange(projectFormData.operationCycleTime)"
+      class="devui-input-group-addon close-icon-wrapper"
+      (click)="dateRangePicker.clearAll()"
+    >
+      <i class="icon icon-close"></i>
+    </div>
+    <div
+      class="devui-input-group-addon"
+      (click)="dateRangePicker.toggle()"
+    >
+      <i class="icon icon-calendar"></i>
+    </div>
+  </div>

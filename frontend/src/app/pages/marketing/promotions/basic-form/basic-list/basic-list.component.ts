@@ -6,15 +6,19 @@ import {
   ViewChild,
 } from '@angular/core';
 import { DialogService, FormLayout, TableWidthConfig } from 'ng-devui';
-import { Subscription } from 'rxjs';
+import { Observable, of as observableOf ,Subscription} from 'rxjs';
 import { FormConfig } from 'src/app/@shared/components/admin-form';
-import { ListDataService, Item } from './list-data.service';
+import { Item, ListPager } from './interfaces';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'da-basic-list',
   templateUrl: './basic-list.component.html',
   styleUrls: ['./basic-list.component.scss'],
 })
+
+
+
 export class BasicListComponent implements OnInit {
   filterAreaShow = false;
 
@@ -102,10 +106,38 @@ export class BasicListComponent implements OnInit {
   EditorTemplate: TemplateRef<any>;
 
   constructor(
-    private listDataService: ListDataService,
     private dialogService: DialogService,
     private cdr: ChangeDetectorRef
   ) {}
+
+  public basicData: Item[] = [
+    {
+      ArticleType: '',
+      Categoria: 'Yriqtjdjd',
+      Descrizione: '65',
+      Prezzo: '2'
+    },
+    {
+      ArticleType: '',
+      Categoria: 'Yriqtjdjd',
+      Descrizione: '15',
+      Prezzo: '2'
+    },
+  ];
+
+  private pagerList(data, pager) {
+    return data.slice(
+      pager.pageSize * (pager.pageIndex - 1),
+      pager.pageSize * pager.pageIndex
+    );
+  }
+
+  getListData(pager: ListPager): Observable<any> {
+    return observableOf({
+      pageList: this.pagerList(this.basicData, pager),
+      total: this.basicData.length,
+    }).pipe(delay(1000));
+  }
 
   ngOnInit() {
     this.getList();
@@ -116,8 +148,7 @@ export class BasicListComponent implements OnInit {
   }
 
   getList() {
-    this.busy = this.listDataService
-      .getListData(this.pager)
+    this.busy = this.getListData(this.pager)
       .subscribe((res) => {
         const data = JSON.parse(JSON.stringify(res.pageList));
         this.basicDataSource = data;

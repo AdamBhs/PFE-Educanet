@@ -19,7 +19,8 @@
         <d-form-control>
           <d-select
             [options]="ArticleOptions"
-            [(ngModel)]="projectFormData.ArticleType"
+            [(ngModel)]="projectFormData.Category"
+            (valueChange)="onSelectionChange()"
             [name]="'ArticleType'"
             [placeholder]="'Select Article'"
             [filterKey]="'name'"
@@ -95,6 +96,6 @@
         </d-form-operation>
       </form>
 
-      <ng-container>
+      <ng-container *ngIf="projectFormData.Category !== '' ">
         <da-basic-list></da-basic-list>
       </ng-container>

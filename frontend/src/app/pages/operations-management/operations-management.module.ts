@@ -6,19 +6,19 @@ import { SharedModule } from 'src/app/@shared/shared.module';
 import { OperationsComponent } from './operations/operations.component';
 
 import { BasicFormOperModule } from './operations/basic-form/basic-form.module';
-import { NotificationsComponent } from './notifications/notifications.component';
+import { NotificationModule } from './notifications/notifications.module';
 
 
 @NgModule({
   declarations: [
     OperationsManagementComponent,
     OperationsComponent,
-    NotificationsComponent,
   ],
   imports: [
     SharedModule,
     OperationsManagementRoutingModule,
-    BasicFormOperModule
+    BasicFormOperModule,
+    NotificationModule
   ],
   providers: [],
 })

@@ -1,13 +1,12 @@
 package com.example.backend.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Set;
 
 @Table(name="customers")
 @Entity
@@ -17,11 +16,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Customers {
     @Id
-    @Column(name="code_client")
-    private Integer codeClient;
-    @Column(name="num_agence")
-    private Integer NumAgence;
-    @Column(name="name")
+    @Column(name="customerCode")
+    private int codeClient;
+    @Column(name="pinCode")
+    private int pinCode;
+    @Column(name="CustomerName")
     private String name;
+    @Column(name="numeroTelp")
+    private String numTelp;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    Agence agence;
+
 
 }

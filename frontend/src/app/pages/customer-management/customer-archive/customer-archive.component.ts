@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SelectModule } from 'ng-devui/select';
 
 @Component({
   selector: 'app-customer-archive',

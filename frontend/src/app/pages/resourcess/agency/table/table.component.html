@@ -1,0 +1,27 @@
+
+  <d-data-table  [dataSource]="basicDataSource" [scrollable]="true" [tableWidthConfig]="tableWidthConfig" [tableOverflowType]="'overlay'">
+    <thead dTableHead>
+      <tr dTableRow>
+        <th dHeadCell *ngFor="let colOption of dataTableOptions.columns">{{ colOption.header }}</th>
+      </tr>
+    </thead>
+    <tbody dTableBody>
+      <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex">
+        <tr dTableRow>
+          <td dTableCell *ngFor="let colOption of dataTableOptions.columns">
+   
+            <d-button *ngIf="colOption.field === 'Etat'" id="primaryBtn" style="margin-right: 8px"
+              (click) = "changeEtat(rowIndex +1, rowItem.Etat)"
+            >
+              {{ rowItem[colOption.field] }}
+            </d-button>
+            <!-- Otherwise, render the regular text -->
+            <ng-container *ngIf="colOption.field !== 'Etat'">
+              {{ rowItem[colOption.field] }}
+            </ng-container>
+            
+          </td>
+        </tr>
+      </ng-template>
+    </tbody>
+  </d-data-table>

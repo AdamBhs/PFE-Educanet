@@ -22,7 +22,7 @@
 </div>	
 
 <div class="da-content-wrapper">
-	<div class="da-content-card">
+	<div class="da-content-card form">
 		<form
         dForm
         ngForm
@@ -51,8 +51,8 @@
 				validators: [{ required: true }],
 				asyncValidators: [
 					{
-					sameName: this.checkCode.bind(this),
-					message: 'Customer card does not exist.'
+						sameName: this.checkCode.bind(this),
+						message: 'Customer card does not exist.'
 					}
 				]
 				}"
@@ -60,11 +60,6 @@
 			</d-form-control>
 		</d-form-item>
 		
-		<ng-container *ngIf="validCode === true">
-			<!-- bish nda5il il data ala tjini sous form json -->
-		</ng-container>
-		
-
 		<d-form-operation>
 			<d-button
 			  dLoading
@@ -80,4 +75,37 @@
 		</d-form-operation>
 	  </form>
 	</div>
+
+	<ng-container *ngIf="validCode === true">
+		<div class="da-content-wrapper">
+			<div class="da-content-card content">
+				<div class="grid-container">
+				<div class="card">
+					<h3>Customer card : </h3>
+					<p>{{customer.codeClient}}</p>
+				</div>
+				<div class="card">
+					<h3>Customer name : </h3>
+					<p>{{customer.name}}</p>
+				</div>
+				<div class="card">
+					<h3>Customer phone : </h3>
+					<p>{{customer.numTelp}}</p>
+				</div>
+				<div class="card">
+					<h3>Pin Code : </h3>
+					<p>{{customer.pinCode}}</p>
+				</div>
+				<div class="card">
+					<h3>Agence Name : </h3>
+					<p>{{customer.agence.agenceName}}</p>
+				</div>
+				<div class="card">
+					<h3>Agence number : </h3>
+					<p>{{customer.agence.numeroAgence}}</p>
+				</div>
+			</div>
+			</div>
+		</div>
+	</ng-container>
 </div>
