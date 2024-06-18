@@ -3,25 +3,19 @@ import { NgModule } from '@angular/core';
 import { MarketingRoutingModule } from './marketing-routing.module';
 import { MarketingComponent } from './marketing.component';
 import { SharedModule } from 'src/app/@shared/shared.module';
-import { PromotionsComponent } from './promotions/promotions.component';
-import { InvoiceComponent } from './invoice/invoice.component';
-import { PercentageComponent } from './percentage/percentage.component';
-import { BasicFormPromModule } from './promotions/basic-form/basic-form.module';
-import { BasicListModule } from './promotions/basic-form/basic-list/basic-list.module';
+import { PromotionsModule } from './promotions/promotions.module';
+import { PromotionCustomerModule } from './promotion-customer/promotion-customer.module';
 
 
 @NgModule({
   declarations: [
     MarketingComponent,
-    PromotionsComponent,
-    InvoiceComponent,
-    PercentageComponent
   ],
   imports: [
     SharedModule,
     MarketingRoutingModule,
-    BasicFormPromModule,
-  
+    PromotionsModule,
+    PromotionCustomerModule
   ],
   providers: [],
 })

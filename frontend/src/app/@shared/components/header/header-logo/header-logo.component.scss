@@ -6,18 +6,8 @@
   user-select: none;
   height: 60px;
   line-height: 60px;
-  padding-left: 16px;
+  padding-left: 50px;
   cursor: pointer;
-
-  &.da-logo-shrink {
-    width: 54px;
-    padding-left: 0;
-    justify-content: center;
-
-    .da-logo-devui {
-      margin-right: 0;
-    }
-  }
 
   .da-logo-devui {
     margin-right: 12px;
@@ -25,8 +15,8 @@
     align-items: center;
 
     img {
-      width: 30px;
-      height: 30px;
+      width: 120px;
+      height: 35px;
     }
   }
 
@@ -43,4 +33,22 @@
 
 .router-active {
   outline: none;
+}
+
+.da-logo-shrink {
+  width: 54px;
+  padding-left: 0;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+
+  .da-logo-devui {
+    margin-top: 10px;
+    margin-right: 0;
+  }
+
+  img {
+    width: 45px;
+    height: 45px;
+  }
 }

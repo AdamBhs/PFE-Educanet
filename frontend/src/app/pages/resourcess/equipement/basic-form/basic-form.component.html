@@ -27,7 +27,7 @@
             [filterKey]="'name'"
             [valueKey]="'name'"
             [allowClear]="true"
-            [dValidateRules]="[{ required: false }]"
+            [dValidateRules]="[{ required: true }]"
           ></d-select>
         </d-form-control>
       </d-form-item>
@@ -36,18 +36,18 @@
         <d-form-label
           [required]="true"
           [hasHelp]="false"
-          >Category</d-form-label
+          >Nome Equipement</d-form-label
         >
         <d-form-control>
           <d-select
-            [options]="AgencyOptions"
-            [(ngModel)]="projectFormData.AgencyName"
-            [name]="'Category'"
-            [placeholder]="'Select Category'"
+            [options]="Nome"
+            [(ngModel)]="projectFormData.nome"
+            [name]="'Nome'"
+            [placeholder]="'Select Nome'"
             [filterKey]="'name'"
             [valueKey]="'name'"
             [allowClear]="true"
-            [dValidateRules]="[{ required: false }]"
+            [dValidateRules]="[{ required: true }]"
           ></d-select>
         </d-form-control>
       </d-form-item>
@@ -68,7 +68,51 @@
         </d-form-operation>
 </form>
 
+<ng-container *ngIf="projectFormData.Submited == true ">
+  <div class="da-content-wrapper">
+    <div class="d-container-present">
+      <div class="d-card-container">
+        <div class="card">
+          <img src="../../../../../assets/img/icons/washing-machine.png"  alt="increase">
+          <div class="card-data">
+            <h3>Nome</h3>
+            <p>{{projectFormData.nome}}</p>
+          </div>
+        </div>
 
+        <div class="card">
+          <img src="../../../../../assets/img/icons/increase.png"  alt="increase">
+          <div class="card-data">
+            <h3>Cycles Number</h3>
+            <p>{{this.equipementData.cyclesNumber}}</p>
+          </div>
+        </div>
 
+        <div class="card">
+          <img src="../../../../../assets/img/icons/back-in-time.png"  alt="increase">
+          <div class="card-data">
+            <h3>Work Time</h3>
+            <p>{{this.equipementData.workTime}}</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="../../../../../assets/img/icons/power-button.png"  alt="increase">
+          <div class="card-data">
+            <h3>Status</h3>
+            <p>{{this.equipementData.status}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="da-content-wrapper">
+    <div class="da-content-card">
+      <div class="da-content-title">Cycles Number</div>
+      <d-col [dSpan]="{ ss: 12, xs: 6 }"><div echarts [options] = "option"></div></d-col>
+    </div>
+  </div>
+</ng-container>
 
 

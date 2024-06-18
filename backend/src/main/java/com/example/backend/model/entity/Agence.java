@@ -19,6 +19,7 @@ public class Agence {
     @Id
     @Column(name="numero")
     private int numeroAgence;
+
     @Column(name="agenceName")
     private String agenceName;
 

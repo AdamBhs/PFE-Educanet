@@ -10,9 +10,17 @@ import java.util.Map;
 
 public interface CustomerRepo extends JpaRepository<Customers, Integer> {
 
-    @Query(value = "SELECT a.agence_name as agence_name, COUNT(c.customer_code) as num FROM customers c JOIN agence a ON c.agence_numero = a.numero GROUP BY a.agence_name;", nativeQuery = true)
+    @Query(value = "SELECT a.agence_name AS agence_name, " +
+            "COUNT(c.customer_code) AS num " +
+            "FROM customers c " +
+            "JOIN agence a ON c.agence_numero = a.numero " +
+            "GROUP BY a.agence_name",
+            nativeQuery = true)
     List<Map<String, Integer>> countCustomersByAgenceName();
 
-    @Query(value="SELECT * from customers c JOIN agence a ON c.agence_numero = a.numero where a.agence_name = :agenceName", nativeQuery = true)
+    @Query(value="SELECT * FROM customers c " +
+            "JOIN agence a ON c.agence_numero = a.numero " +
+            "WHERE a.agence_name = :agenceName",
+            nativeQuery = true)
     List<Customers> getCustomersByAgence(@Param("agenceName") String agenceName);
 }

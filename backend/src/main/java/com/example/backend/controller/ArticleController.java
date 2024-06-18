@@ -34,8 +34,8 @@ public class ArticleController {
     }
 
     @DeleteMapping("/deleteArticle")
-    public void deleteArticle(@RequestParam("name") String articleName) {
-        this.articleService.deleteArticleByName(articleName);
+    public void deleteArticle(@RequestParam("id") int id) {
+        this.articleService.deleteArticleById(id);
     }
 
     @PutMapping("/updateArticlePrix")

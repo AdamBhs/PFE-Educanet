@@ -4,32 +4,15 @@ import { User } from 'src/app/@shared/models/user';
 
 const USERS = [
   {
-    account: 'Admin',
+    account: 'admin',
     gender: 'male',
-    userName: 'Admin',
-    password: '******',
+    userName: 'admin',
+    password: 'admin',
     phoneNumber: '19999996666',
     email: 'admin@devui.com',
     userId: '100',
   },
-  {
-    account: 'User',
-    gender: 'female',
-    userName: 'User',
-    password: '******',
-    phoneNumber: '19900000000',
-    email: 'user@devui.com',
-    userId: '200',
-  },
-  {
-    account: 'admin@devui.com',
-    gender: 'male',
-    userName: 'Admin',
-    password: '******',
-    phoneNumber: '19988888888',
-    email: 'admin@devui.com',
-    userId: '300',
-  },
+
 ];
 
 @Injectable()

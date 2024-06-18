@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { BasicFormComponent } from './basic-form.component';
 import { SelectModule, CheckBoxModule, DatepickerModule } from 'ng-devui';
 import { SharedModule } from 'src/app/@shared/shared.module';
-import { BasicListModule } from './basic-list/basic-list.module';
+import {NgxEchartsModule } from 'ngx-echarts';
 
 @NgModule({
   declarations: [BasicFormComponent],
@@ -13,7 +13,10 @@ import { BasicListModule } from './basic-list/basic-list.module';
     SelectModule,
     CheckBoxModule,
     DatepickerModule,
-    BasicListModule
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts'), 
+    }),
+    
   ],
   exports: [BasicFormComponent],
 })

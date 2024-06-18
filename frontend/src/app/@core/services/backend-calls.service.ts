@@ -48,8 +48,8 @@ export class BackendCallsService {
     return this.http.get<any>("http://localhost:8080/getArticles");
   }
 
-  deleteArticleByName(name: any):Observable<any> {
-    return this.http.delete<any>(`http://localhost:8080/deleteArticle?name=${name}`);
+  deleteArticleById(id: any):Observable<any> {
+    return this.http.delete<any>(`http://localhost:8080/deleteArticle?id=${id}`);
   }
 
   updateArticleByName(name: any, newPrix: any):Observable<any> {
@@ -74,7 +74,7 @@ export class BackendCallsService {
     return this.http.get<any>(`http://localhost:8080/getCaisseDataByDate?numAgence=${numAgence}&startDate=${startDate}&endDate=${endDate}`)
   }
 
-  // -- notifications backend ---
+  // --- notifications backend ---
   getNotifications(numAgence: any):Observable<any> {
     return this.http.get<any>(`http://localhost:8080/getNotifications?numAgence=${numAgence}`);
   }
@@ -86,4 +86,64 @@ export class BackendCallsService {
   deleteNotification(idNotification: any):Observable<any> {
     return this.http.delete<any>(`http://localhost:8080/deleteNotification?idNotification=${idNotification}`);
   }
+
+  // --- Promotions backend ---
+  getPromotions(numAgence: any):Observable<any> {
+    return this.http.get<any>(`http://localhost:8080/getPromotions?numAgence=${numAgence}`);
+  }
+
+  getCustomersPromotions(numAgence: any):Observable<any> {
+    return this.http.get<any>(`http://localhost:8080/getCustomersPromotions?numAgence=${numAgence}`);
+  }
+
+  addPromotion(data: any):Observable<any> {
+    return this.http.post<any>(`http://localhost:8080/addPromotion?numAgence=${data.numAgence}&startDate=${data.intervalTime[0]}&endDate=${data.intervalTime[1]}&category=${data.category}&nameArticle=${data.articleName}&newPrix=${data.newPrice}`, {})
+  }
+
+  addPromotionForCustomer(data: any):Observable<any> {
+    return this.http.post<any>(`http://localhost:8080/addPromotionCustomer?numCustomer=${data.customerCode}&startDate=${data.intervalTime[0]}&endDate=${data.intervalTime[1]}&category=${data.category}&nameArticle=${data.articleName}&newPrix=${data.newPrice}`, {})
+  }
+
+  deletePromotion(id: any):Observable<any> {
+    return this.http.delete<any>(`http://localhost:8080/deletePromotion?idPromotion=${id}`);
+  }
+
+  // --- Operations backend ---
+  getOperations(numAgence: any):Observable<any> {
+    return this.http.get<any>(`http://localhost:8080/getOperations?numAgence=${numAgence}`);
+  }
+
+  getOperationsByDate(numAgence: any, startDate: any, endDate: any):Observable<any> {
+    return this.http.get<any>(`http://localhost:8080/getOperationsByDate?numAgence=${numAgence}&startDate=${startDate}&endDate=${endDate}`);
+  }
+
+  getOperationsOfToDay():Observable<any> {
+    return this.http.get<any>("http://localhost:8080/getOperationsOfToday");
+  }
+
+  getQuantityByAgence():Observable<any> {
+    return this.http.get<any>("http://localhost:8080/getQuantityByAgence");
+  }
+
+  getPricePerAgence():Observable<any> {
+    return this.http.get<any>(`http://localhost:8080/getPricePerAgence`);
+  }
+
+  getTotalProfit():Observable<any> {
+    return this.http.get<any>(`http://localhost:8080/getTotalProfit`);
+  }
+
+  getTotalQuantityToday():Observable<any> {
+    return this.http.get<any>(`http://localhost:8080/getTotalQuantityToday`);
+  }
+
+  getTotalOperationsByAgence():Observable<any> {
+    return this.http.get<any>(`http://localhost:8080/getTotalOperationsByAgence`);
+  }
+
+  getQuantityPerCategory():Observable<any> {
+    return this.http.get<any>(`http://localhost:8080/getQuantityPerCategory`);
+  }
 }
+
+

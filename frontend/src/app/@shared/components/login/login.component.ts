@@ -33,10 +33,10 @@ export class LoginComponent implements OnInit {
   i18nValues: any;
 
   formData = {
-    userAccount: 'Admin',
-    userAccountPassword: '******',
+    userAccount: '',
+    userAccountPassword: '',
     userEmail: 'admin@devui.com',
-    userEmailPassword: '******'
+    userEmailPassword: 'admin'
   };
 
   formRules: { [key: string]: DValidateRules } = {
@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
       ],
     },
     passwordRules: {
-      validators: [{ required: true }, { minlength: 6 }, { maxlength: 15 }, { pattern: /^[a-zA-Z0-9\d@$!%*?&.]+(\s+[a-zA-Z0-9]+)*$/ }],
+      validators: [{ required: true }, { minlength: 3 }, { maxlength: 15 }, { pattern: /^[a-zA-Z0-9\d@$!%*?&.]+(\s+[a-zA-Z0-9]+)*$/ }],
       message: 'Enter a password that contains 6 to 15 digits and letters.',
     },
   };

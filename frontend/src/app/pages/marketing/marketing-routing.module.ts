@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MarketingComponent } from './marketing.component';
 import { PromotionsComponent } from './promotions/promotions.component';
-import { InvoiceComponent } from './invoice/invoice.component';
-import { PercentageComponent } from './percentage/percentage.component';
+import { PromotionCustomerComponent } from './promotion-customer/promotion-customer.component';
 
 const routes: Routes = [
     { 
@@ -12,8 +11,7 @@ const routes: Routes = [
       children: [], 
     },
     { path: 'promotions', component: PromotionsComponent },
-    { path: 'invoice', component: InvoiceComponent },
-    { path: 'percentage', component: PercentageComponent }
+    { path: 'promotion-customer', component: PromotionCustomerComponent}
   ];
 
 @NgModule({

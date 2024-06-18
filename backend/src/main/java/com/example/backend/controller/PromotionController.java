@@ -26,13 +26,13 @@ public class PromotionController {
         return this.promotionService.getPromotions(agenceNum);
     }
 
-    @GetMapping("/getPromotionsCustomer")
-    public List<Promotion> getPromotionsCustomer(@RequestParam("numAgence") Integer agenceNum) {
+    @GetMapping("/getCustomersPromotions")
+    public List<Map<String, Object>> getCustomersPromotions(@RequestParam("numAgence") Integer agenceNum) {
         return this.promotionService.getCustomersPromotions(agenceNum);
     }
 
     @PostMapping("/addPromotion")
-    public void addPromotion(@RequestParam("numAgence") Agence agenceNum,
+    public void addPromotion(@RequestParam("numAgency") Agence agenceNum,
                              @RequestParam("startDate") Date startDate,
                              @RequestParam("endDate") Date endDate,
                              @RequestParam("category") String category,
@@ -55,7 +55,6 @@ public class PromotionController {
         Article numArticle = this.articleService.getArticleByCategoryAndName(category, nameArticle);
 
         this.promotionService.addPromotionForCustomer(codeCustomer, startDate, endDate, numArticle, newPrix);
-
     }
 
     @PutMapping("/updatePromotion")

@@ -47,3 +47,50 @@ form {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.da-content-card {
+  box-shadow: 0 2px 8px rgba(156, 160, 169, 0.7); 
+}
+
+.d-container-present {
+  box-shadow: 0 2px 8px rgba(156, 160, 169, 0.7); 
+  border-radius: 6px;
+  margin-top: 60px;
+  width: 100%;
+  height: 140px;
+  .d-card-container {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+  .card {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex: 0 1 auto;
+    .card-data {
+      height: 40%;
+      display: flex;
+      flex-direction: column;
+      margin-left: 30px;
+      h3 {
+        font-size: 16px;
+        margin-top: 6px;
+        margin-bottom: 6px;
+      }
+      p {
+        margin-left: 2px;
+        margin-top: 3px;
+        margin-bottom: 3px;
+        font-size: 14px;
+      }
+    }
+
+    img {
+      width: 50px;
+      height: 50px;
+    }
+  }
+}

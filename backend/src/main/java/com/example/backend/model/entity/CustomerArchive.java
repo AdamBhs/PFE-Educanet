@@ -20,16 +20,20 @@ public class CustomerArchive {
 
     @Column(name="quantity")
     private int quantity;
+
+    @ManyToOne
+    @JoinColumn(name="idArticle")
+    private Article article;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="customerId")
+    private Customers customers;
     @Embeddable
     public static class IdCustomerArchive implements Serializable {
-        @ManyToOne(cascade = CascadeType.ALL)
-        @JoinColumn(name="customerId")
-        private Customers customers;
+
         @ManyToOne(cascade = CascadeType.ALL)
         @JoinColumn(name="operationNumber")
         private Operations operations;
-        @ManyToOne
-        @JoinColumn(name="idArticle")
-        private Article article;
+
     }
 }

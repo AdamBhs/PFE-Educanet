@@ -1,21 +1,16 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from 'src/app/@shared/shared.module';
-import { SampleComponent } from './sample/sample.component';
 import { GettingStartedComponent } from './getting-started.component';
 import { GettingStartedRoutingModule } from './getting-started-routing.module';
-import { NgxEchartsModule } from 'ngx-echarts';
-import { DataTableModule } from 'ng-devui';
+import { SampleModule } from './sample/sample.module';
 
 @NgModule({
-  declarations: [GettingStartedComponent, SampleComponent],
+  declarations: [GettingStartedComponent],
   imports: [
     SharedModule,
-    DataTableModule,
+    SampleModule,
     GettingStartedRoutingModule,
-    NgxEchartsModule.forRoot({
-      echarts: () => import('echarts'), 
-    }),
     ],
   providers: [],
 })

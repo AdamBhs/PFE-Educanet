@@ -40,15 +40,15 @@ import {
       if (this.projectFormData.operationCycleTime[0] == null &&
         this.projectFormData.operationCycleTime[1] == null ) 
         {
-          return;
-        }
+          this.projectFormData.intervalTime = [null, null];
+        }else {
       let firstDateList = this.projectFormData.operationCycleTime[0].toString().split(' ');
       this.firstDatefinal = firstDateList[3] +'-'+ this.month[firstDateList[1]] +'-'+ firstDateList[2];
       let secondDateList = this.projectFormData.operationCycleTime[1].toString().split(' ');
       this.secondDatefinal = secondDateList[3] +'-'+ this.month[secondDateList[1]] +'-'+ secondDateList[2];
         
       this.projectFormData.intervalTime = [this.firstDatefinal, this.secondDatefinal];
-
+      }
     }
   }
   

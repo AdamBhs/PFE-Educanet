@@ -122,7 +122,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     setTimeout(() => {
-      this.refreshDataAndView(); // TODO: 解决时间周期问题
+      this.refreshDataAndView(); 
     });
   }
 }

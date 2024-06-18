@@ -13,8 +13,8 @@ public class EquipementController {
     @Autowired
     private EquipementService equipementService;
 
-    @GetMapping("/getEquipement/{numAgence}")
-    public Equipement getEquipement(@PathVariable("numAgence") int numAgence,
+    @GetMapping("/getEquipement")
+    public Equipement getEquipement(@RequestParam("numAgence") int numAgence,
                                     @RequestParam("nome") String nome) {
         return this.equipementService.getEquipement(nome, numAgence);
     }

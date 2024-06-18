@@ -16,47 +16,56 @@
 </d-row> -->
 <div class="da-content-wrapper">
     <d-row>
-          <div class="da-content-card">
-            <div class="da-content-title">Price per agency</div>
-            <d-col [dSpan]="{ ss: 12, xs: 6 }">
-              <div echarts [options]= "option_1"></div>
-            </d-col>
+        <div class="da-content-card da-content-card-first" style="height: 150px;">
+          <div class="da-content-title">TOTAL CLIENTS CONNECTED TODAY</div>
+          <div class="d-card d-client">
+            <h2 >{{this.totalClientConnected}}</h2>
+            <img src="../../../../assets/img/icons/rating.png"  alt="Clients">
           </div>
-          
-          <div class="da-content-card">
-            <div class="da-content-title">Total Customers</div>
-            <d-col [dSpan]="{ ss: 12, xs: 6 }"><div echarts [options]= "option_2"></div></d-col>
-          </div>
+        </div>
 
-          <!-- <div class="da-content-card">
-            <div class="da-content-title">Total Customers</div>
-            <d-col [dSpan]="{ ss: 12, xs: 6 }">
-              <d-data-table [dataSource]="basicDataSource" [scrollable]="true" [tableWidthConfig]="tableWidthConfig" [tableOverflowType]="'overlay'">
-                <thead dTableHead>
-                  <tr dTableRow>
-                  <th dHeadCell *ngFor="let colOption of dataTableOptions.columns">{{ colOption.header }}</th>
-                  </tr>
-                </thead>
-                <tbody dTableBody>
-                  <ng-template let-rowItem="rowItem" let-rowIndex="rowIndex">
-                  <tr dTableRow>
-                    <td dTableCell *ngFor="let colOption of dataTableOptions.columns">
-                    {{ colOption.fieldType === 'date' ? (rowItem[colOption.field] | i18nDate: 'short':false) : rowItem[colOption.field] }}
-                    </td>
-                  </tr>
-                  </ng-template>
-                </tbody>
-                </d-data-table>
-            </d-col>
-          </div> -->
+        <div class="da-content-card da-content-card-first">
+          <div class="da-content-title">TOTAL PROFITS TODAY</div>
+          <div class="d-card d-profits">
+            <h2 >{{this.totalProfit}} €</h2>
+            <img src="../../../../assets/img/icons/business-and-finance.png"  alt="profits">
+          </div>
+        </div>
+
+        <div class="da-content-card da-content-card-first">
+          <div class="da-content-title"> QUANTITY OF ARTICLES TODAY</div>
+          <div class="d-card d-quantity">
+            <h2 >{{this.totalQuantity}}</h2>
+            <img src="../../../../assets/img/icons/quantity.png"  alt="quantity">
+          </div>
+        </div>
+
+        <div class="da-content-card">
+          <div class="da-content-title">PRICE PER AGENCY</div>
+          <d-col [dSpan]="{ ss: 12, xs: 6 }">
+            <div echarts [options]= "option_1"></div>
+          </d-col>
+        </div>
+          
+        <div class="da-content-card">
+          <div class="da-content-title">QUANTITY PER AGENCY</div>
+          <d-col [dSpan]="{ ss: 12, xs: 6 }"><div echarts [options] = "option_2"></div></d-col>
+        </div>
+
+        <div class="da-content-card">
+          <div class="da-content-title">STATE OF AGENCY</div>
+          <d-basic class="da-table"></d-basic>
+        </div>
+          
           
         <div class="da-content-card da-content-card-two">
-          <div class="da-content-title">Client Connected Today</div>
+          <div class="da-content-title">QUANTITY PER CATEGORY</div>
           <d-col [dSpan]="{ ss: 12, xs: 6 }"><div echarts [options]= "option_3"></div></d-col>
         </div>
 
         <div class="da-content-card da-content-card-three">
-          <div class="da-content-title">Total Clients connected today</div>
+          <div class="da-content-title">TOTAL CLIENTS CONNECTED PER AGENCE</div>
+          <d-col [dSpan]="{ ss: 12, xs: 6 }"><div echarts [options] = "option_4"></div></d-col>
         </div>
     </d-row>
 </div>

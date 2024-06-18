@@ -32,6 +32,5 @@ export class CustomerArchiveComponent {
 
   onOptionSelected(event: any) {
     this.selectedOption = event.target.value;
-    console.log(event.target.value)
   }
 }

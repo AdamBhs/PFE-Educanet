@@ -121,16 +121,6 @@ export class BasicListComponent implements OnInit {
 
   ngOnInit() {
     this.getList();
-    
-    // setTimeout(() => {
-    //   console.log(this.basicDataSource);
-    // }, 3000);
-    // setTimeout(() => {
-    //   this.basicDataSource.pop()
-    // }, 4000);
-    // setTimeout(() => {
-    //   console.log(this.basicDataSource);
-    // }, 5000);
   }
 
   getList() {

@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { FormLayout } from 'ng-devui';
+import { BasicListComponent } from './basic-list/basic-list.component';
 
 @Component({
   selector: 'da-basic-form',
@@ -10,18 +11,15 @@ import { FormLayout } from 'ng-devui';
   styleUrls: ['./basic-form.component.scss'],
 })
 export class BasicFormComponent {
+  @ViewChild(BasicListComponent) basicList: BasicListComponent;
   projectFormData = {
-    CustomerCode: '',
-    projectOwner: null,
+    numAgence: null,
     AgencyName: null,
-    projectCycleTime: [null, null],
+    intervalTime: [null, null],
+    operationCycleTime: [null, null],
   };
 
   verticalLayout: FormLayout = FormLayout.Vertical;
-
-  existCustomerCard = ['123', '124']; // check if the customer Code exist or not
-
-   
 
   AgencyOptions = [
     { id: '1', name: 'Carpi' },
@@ -29,37 +27,27 @@ export class BasicFormComponent {
     { id: '3', name: 'Modena' },
     { id: '4', name: 'Soliera' },
   ];
-
-  getValue(value) {
-    console.log(value);
+  
+  isTimeNull(arr): boolean {
+    return arr[0] === null && arr[1] === null;
   }
 
-  everyRange(range) {
-    return range.every((_) => !!_);
+  onSelectChange(value) {
+    this.projectFormData.numAgence = value["id"];
+    this.basicList.getNumAgence(value["id"]);
+    this.basicList.getList();
   }
 
-  checkName(value) {
-    let res = false;
-    if (this.existCustomerCard.indexOf(value) !== -1) {
-      res = true;
-    }
-    return of(res).pipe(delay(500));
-  }
-
-  validateDate(value): Observable<string | null> {
-    let message = null;
+  getProjectFormData() {
+    this.basicList.getProjectFormData(this.projectFormData);
+    this.basicList.getListByDate();
     
-    message = {
-      'en-us':
-        'The task queue on the current execution day (Tuesday) is full.',
-    };
-      
-    return of(message).pipe(delay(300));
   }
+  
 
   submitProjectForm({ valid, directive, data, errors }) {
-    if (valid) {
-      // do something
+    if (valid && !this.isTimeNull(this.projectFormData.intervalTime)) {
+      this.getProjectFormData();
     } else {
       // error tip
     }

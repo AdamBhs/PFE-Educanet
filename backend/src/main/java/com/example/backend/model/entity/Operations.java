@@ -17,6 +17,7 @@ import java.sql.Date;
 @NoArgsConstructor
 public class Operations {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="operationNumber")
     private int operationNum;
     @Column(name="dateOperation")
@@ -28,6 +29,5 @@ public class Operations {
 
     @Enumerated(EnumType.STRING)
     private PayementType payType;
-
 
 }

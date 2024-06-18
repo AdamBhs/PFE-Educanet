@@ -6,7 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { DialogService, FormLayout, TableWidthConfig } from 'ng-devui';
-import { Subscription } from 'rxjs';
+import { Subscription, delay, of } from 'rxjs';
 import { FormConfig } from 'src/app/@shared/components/admin-form';
 import { ListDataService, Item } from './list-data.service';
 import { BackendCallsService } from 'src/app/@core/services/backend-calls.service';
@@ -38,18 +38,17 @@ export class BasicListComponent implements OnInit {
   tableWidthConfig: TableWidthConfig[] = [
     {
       field: 'ArticleName',
-      width: '100px',
+      width: '200px',
     },
     {
       field: 'ArticlePrice',
-      width: '200px',
+      width: '100px',
     },
     {
       field: 'Actions',
       width: '100px',
     },
   ];
-
   basicDataSource: Item[] = [];
 
   formConfig: FormConfig = {
@@ -64,7 +63,12 @@ export class BasicListComponent implements OnInit {
           validators: [
             { required: true },
           ],
-          
+          asyncValidators: [
+            {
+              sameName: this.isFloat.bind(this),
+              message: 'Wrong input.'
+            }
+          ]
         },
       },
       
@@ -94,24 +98,16 @@ export class BasicListComponent implements OnInit {
     private dialogService: DialogService,
     private backendService: BackendCallsService,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) {
+    
+  }
 
   ngOnInit() {
     this.getList();
-    // setTimeout(() => {
-    //   this.basicDataSource.pop();
-    // }, 3000);
-    // setTimeout(() => {
-    //   console.log(this.basicDataSource);
-    // }, 4000);
-    // setTimeout(() => {
-    //   this.basicDataSource.push({
-    //     ArticleType: '',
-    //     ArticleName: 'Yriqtjdjd Omvqxe Xxlfgjtnj Hsyf Qecu',
-    //     ArticlePrice: '65',
-    //   })
-    // }, 5000);
-    
+    setTimeout(() => {
+      console.log(this.basicDataSource);
+    }, 7000);
+
   }
 
   search() {
@@ -126,6 +122,12 @@ export class BasicListComponent implements OnInit {
         this.basicDataSource = data;
         this.pager.total = res.total;
       });
+  }
+
+  isFloat(value) {
+    const regex = /^[+]?[1-9]*\.?[0-9]+$/;
+    
+    return of(regex.test(value)).pipe(delay(500));
   }
 
   editRow(row, index) {
@@ -162,10 +164,10 @@ export class BasicListComponent implements OnInit {
           text: 'Ok',
           disabled: false,
           handler: ($event: Event) => {
-            console.log(row["ArticleName"]);
+            console.log(row["idArticle"]);
             this.basicDataSource.splice(index, 1);
             results.modalInstance.hide();
-            this.listDataService.deleteArticleByName(row["ArticleName"]);
+            this.listDataService.deleteArticleById(row["idArticle"]);
           },
         },
         {

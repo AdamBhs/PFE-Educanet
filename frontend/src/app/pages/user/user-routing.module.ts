@@ -9,7 +9,6 @@ const routes: Routes = [
    path: '',
    component: UserComponent,
    children: [
-      { path: 'center', component: CenterComponent },
       { path: 'settings', component: SettingsComponent }
     ],
   },

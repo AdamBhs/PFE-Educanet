@@ -3,6 +3,7 @@ package com.example.backend.service;
 import com.example.backend.enumerations.Categorie;
 import com.example.backend.model.entity.Article;
 import com.example.backend.model.entity.Customers;
+import com.example.backend.model.entity.Notifications;
 import com.example.backend.repository.ArticleRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,13 +42,13 @@ public class ArticleService {
         article.setCategorie(categorie);
         articleRepo.save(article);
     }
-
-    public void deleteArticleByName(String name) {
-        String article = articleRepo.getArticleByName(name);
+    
+    public void deleteArticleById(int id) {
+        Optional<Article> article = articleRepo.findById(id);
         if (!article.isEmpty()) {
-            articleRepo.deleteArticleByName(name);
+            articleRepo.deleteArticleById(id);
         } else {
-            throw new IllegalArgumentException("Article with Name " + name + " not found.");
+            throw new IllegalArgumentException("Article with Name " + id + " not found.");
         }
     }
 

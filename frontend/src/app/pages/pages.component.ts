@@ -133,7 +133,6 @@ export class PagesComponent implements OnInit {
         children: [
           { title: 'Price List', link: '/pages/finances/price-list' },
           { title: 'Caisse', link: '/pages/finances/caisse' },
-          { title: 'Invoices', link: '/pages/finances/invoices' },
         ],
         link: "/pages/finances",
         menuIcon: "icon icon-fee-center", 
@@ -144,7 +143,6 @@ export class PagesComponent implements OnInit {
         children: [
           
           { title: 'Agency', link: '/pages/resourcess/agency' },
-          { title: 'Laboratoire', link: '/pages/resourcess/laboratoire' },
           { title: 'Equipement', link: '/pages/resourcess/equipement' },
         ],
         link: "/pages/resourcess",
@@ -155,7 +153,7 @@ export class PagesComponent implements OnInit {
         open: false,
         children: [
           { title: 'Promotion', link: '/pages/marketing/promotions' },
-          { title: 'Promotion client', link: '/pages/marketing/invoice' },
+          { title: 'Promotion Client', link: '/pages/marketing/promotion-customer'}
         ],
         link: "/pages/marketing",
         menuIcon: "icon icon-desk-notice", 
@@ -165,7 +163,7 @@ export class PagesComponent implements OnInit {
         open: false,
         children: [
           { title: 'Operations', link: '/pages/operations-management/operations' },
-          { title: 'Notifications', link: '/pages/operations-management/notifications' },
+          { title: 'Remarks', link: '/pages/operations-management/notifications' },
         ],
         link: "/pages/operations-management",
         menuIcon: "icon icon-setting", 
@@ -175,7 +173,6 @@ export class PagesComponent implements OnInit {
         title: 'User',
         open: false,
         children: [
-          { title: 'User Center', link: '/pages/user/center' },
           { title: 'User Settings', link: '/pages/user/settings' },
         ],
         link: "/pages/user",

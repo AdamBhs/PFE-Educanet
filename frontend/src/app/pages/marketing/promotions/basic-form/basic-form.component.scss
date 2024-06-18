@@ -7,6 +7,11 @@
   border-radius: $devui-border-radius-card;
   box-shadow: $devui-shadow-length-base $devui-light-shadow;
 }
+.fixed-height-dropdown .devui-dropdown-menu {
+  max-height: 150px; 
+  overflow-y: auto;
+
+}
 
 form {
   margin: 0 auto;

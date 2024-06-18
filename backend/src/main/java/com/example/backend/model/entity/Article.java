@@ -22,7 +22,7 @@ public class Article {
     private int idArticle;
     @Enumerated(EnumType.STRING)
     private Categorie categorie;
-    @Column(name="ArticleName", unique = true)
+    @Column(name="ArticleName")
     private String articleName;
     @Column(name="ArticlePrix")
     private float articlePrix;

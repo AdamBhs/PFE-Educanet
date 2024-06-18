@@ -24,6 +24,9 @@ class I18NLoader implements TranslateLoader {
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts'), 
+    }),
     CoreModule.forRoot(),
     SharedModule.forRoot(),
     TranslateModule.forRoot({

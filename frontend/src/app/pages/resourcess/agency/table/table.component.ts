@@ -55,13 +55,13 @@ export class DatatableDemoBasicComponent implements OnInit {
     )
   }
 
-  async changeEtat(id, currentEtat) {
+  changeEtat(id, currentEtat) {
     let newEtat = (currentEtat === 'Connected') ? 'Disconnected' : 'Connected';
 
-    await this.backendService.updateEtatAgence(id, newEtat).subscribe(
+     this.backendService.updateEtatAgence(id, newEtat).subscribe(
       response => {
         console.log("Update successful:", response);
-        
+        this.getTableAgences();
       },
       error => {
         console.error("Update failed:", error);
@@ -69,7 +69,7 @@ export class DatatableDemoBasicComponent implements OnInit {
       }
     );
 
-    this.getTableAgences();
+    
   }
 
   ngOnInit() {

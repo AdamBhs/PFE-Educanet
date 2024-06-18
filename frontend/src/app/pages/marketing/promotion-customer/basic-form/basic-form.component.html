@@ -1,0 +1,160 @@
+
+<form
+dForm
+ngForm
+[dValidateRules]="{
+  message: 'The form verification failed, please check.'
+}"
+[layout]="verticalLayout"
+#projectForm="dValidateRules"
+(dSubmit)="submitProjectForm($event)"
+autocomplete="off"
+>
+
+<d-form-item>
+<d-form-label
+  [required]="true"
+  [hasHelp]="false"
+  [helpTips]="'This is Agency name.'"
+  >Agency</d-form-label
+>
+<d-form-control>
+  <d-select
+    [options]="AgencyOptions"
+    [(ngModel)]="projectFormData.agencyName"
+    (valueChange)="isCategoryFilled($event); valuechangeAgence($event);"
+    [name]="'AgencyName'"
+    [placeholder]="'Select Agency'"
+    [filterKey]="'name'"
+    [valueKey]="'name'"
+    [allowClear]="true"
+    [dValidateRules]="[{ required: true }]"
+  ></d-select>
+</d-form-control>
+</d-form-item>
+
+<d-form-item>
+  <d-form-label
+    [required]="true"
+    [hasHelp]="false"
+    >Category</d-form-label
+  >
+  <d-form-control>
+    <d-select
+      [options]="ArticleOptions"
+      [(ngModel)]="projectFormData.category"
+      [name]="'category'"
+      (valueChange)="isCategoryFilled($event)"
+      [placeholder]="'Select Category'"
+      [filterKey]="'name'"
+      [valueKey]="'name'"
+      [allowClear]="true"
+      [dValidateRules]="[{ required: true }]"
+    ></d-select>
+  </d-form-control>
+</d-form-item>
+
+<d-form-item>
+  <d-form-label
+    [required]="true"
+    [hasHelp]="false"
+    [helpTips]="'This is Agency name.'"
+    >Article Name</d-form-label
+  >
+  <d-form-control>
+    <d-select
+      [options]="articleNames"
+      [(ngModel)]="projectFormData.articleName"
+      [name]="'articleName'"
+      [placeholder]="'Select Article Name'"
+      [filterKey]="'name'"
+      [disabled]="displayArticleName"
+      [valueKey]="'name'"
+      [allowClear]="true"
+      [dValidateRules]="[{ required: true }]"
+    ></d-select>
+  </d-form-control>
+</d-form-item>
+
+<d-form-item>
+  <d-form-label
+    [required]="true"
+    >Customer Code
+    </d-form-label
+  >
+  <d-form-control>
+    <input
+      [disabled]="isCustomerCode"
+      dTextInput
+      autocomplete="off"
+      name="customerCode"
+      placeholder="Customer Code"
+      [(ngModel)]="projectFormData.customerCode"
+      [dValidateRules]="{
+        validators: [{ required: true }],
+        asyncValidators: [
+          {
+            sameName: this.checkCode.bind(this),
+            message: 'Wrong input.'
+          }
+        ]
+      }"
+    />
+  </d-form-control>
+</d-form-item>
+
+<d-form-item>
+  <d-form-label
+    [required]="true"
+    >New Price</d-form-label
+  >
+  <d-form-control>
+    <input
+      dTextInput
+      autocomplete="off"
+      name="newPrice"
+      placeholder="New Price"
+      [(ngModel)]="projectFormData.newPrice"
+      [dValidateRules]="{
+        validators: [{ required: true }],
+        asyncValidators: [
+          {
+            sameName: this.isFloat.bind(this),
+            message: 'Wrong input.'
+          }
+        ]
+      }"
+    />
+  </d-form-control>
+</d-form-item>
+
+
+<d-form-item>
+  <d-form-label [required]="true">date interval</d-form-label>
+  <d-form-control>
+    <d-range-type-picker [ProjectFormData]="projectFormData"></d-range-type-picker>
+  </d-form-control>
+</d-form-item>
+
+<d-form-operation>
+  <d-button
+    dLoading
+    class="mr-element-spacing"
+    [title]="projectForm.errorMessage || ''"
+    circled="true"
+    style="margin-right: 8px"
+    dFormSubmit
+    [dFormSubmitData]="'submit-button'"
+  >
+    Submit
+  </d-button>
+</d-form-operation>
+
+</form>
+
+<ng-container >
+<da-basic-list></da-basic-list>
+</ng-container>
+
+
+

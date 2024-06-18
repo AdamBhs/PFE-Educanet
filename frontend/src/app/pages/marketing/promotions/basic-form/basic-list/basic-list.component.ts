@@ -1,15 +1,17 @@
 import {
   ChangeDetectorRef,
   Component,
+  Input,
   OnInit,
   TemplateRef,
   ViewChild,
 } from '@angular/core';
 import { DialogService, FormLayout, TableWidthConfig } from 'ng-devui';
-import { Observable, of as observableOf ,Subscription} from 'rxjs';
+import { delay, Observable, of as observableOf ,of,Subscription} from 'rxjs';
 import { FormConfig } from 'src/app/@shared/components/admin-form';
 import { Item, ListPager } from './interfaces';
-import { delay } from 'rxjs/operators';
+import { BackendCallsService } from 'src/app/@core/services/backend-calls.service';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'da-basic-list',
@@ -72,15 +74,20 @@ export class BasicListComponent implements OnInit {
     items: [
 
       {
-        label: 'Categoria',
-        prop: 'Categoria',
+        label: 'Prezzo',
+        prop: 'Prezzo',
         type: 'input',
         required: true,
         rule: {
           validators: [
             { required: true },
           ],
-          
+          asyncValidators: [
+            {
+              sameName: this.isFloat.bind(this),
+              message: 'Wrong input.'
+            }
+          ]
         },
       },
       
@@ -93,6 +100,8 @@ export class BasicListComponent implements OnInit {
   editForm = null;
 
   editRowIndex = -1;
+
+  numAgence: any;
 
   pager = {
     total: 0,
@@ -107,23 +116,11 @@ export class BasicListComponent implements OnInit {
 
   constructor(
     private dialogService: DialogService,
+    private backendService: BackendCallsService,
     private cdr: ChangeDetectorRef
   ) {}
 
-  public basicData: Item[] = [
-    {
-      ArticleType: '',
-      Categoria: 'Yriqtjdjd',
-      Descrizione: '65',
-      Prezzo: '2'
-    },
-    {
-      ArticleType: '',
-      Categoria: 'Yriqtjdjd',
-      Descrizione: '15',
-      Prezzo: '2'
-    },
-  ];
+
 
   private pagerList(data, pager) {
     return data.slice(
@@ -132,18 +129,17 @@ export class BasicListComponent implements OnInit {
     );
   }
 
-  getListData(pager: ListPager): Observable<any> {
-    return observableOf({
-      pageList: this.pagerList(this.basicData, pager),
-      total: this.basicData.length,
-    }).pipe(delay(1000));
-  }
+
 
   ngOnInit() {
-    this.getList();
   }
 
   search() {
+    this.getList();
+  }
+  
+  getNumAgence(numAgence?: any) {
+    this.numAgence = numAgence;
     this.getList();
   }
 
@@ -154,6 +150,36 @@ export class BasicListComponent implements OnInit {
         this.basicDataSource = data;
         this.pager.total = res.total;
       });
+  }
+
+  getListData(pager: ListPager): Observable<any> {
+
+    const observable = new Observable((observer) => {
+      this.backendService.getPromotions(
+        this.numAgence
+      ).subscribe(
+        (promotions) => {
+          const simplifiedPromotions = promotions.map(promotion => ({
+            idPromotion: promotion.id,
+            Categoria: promotion.category,
+            Descrizione: promotion.nameArticle,
+            Prezzo: promotion.newprix,
+            Inizio: promotion.startDate,
+            Fine: promotion.endDate
+          }));
+
+          observer.next({
+            pageList: this.pagerList(simplifiedPromotions, pager),
+            total: promotions.length,
+          });
+          observer.complete();
+        },
+        (error) => {
+          observer.error(error);
+        }
+      );
+    });
+    return observable;
   }
 
   editRow(row, index) {
@@ -172,7 +198,7 @@ export class BasicListComponent implements OnInit {
     });
   }
 
-  deleteRow(index) {
+  deleteRow(row, index) {
     const results = this.dialogService.open({
       id: 'delete-dialog',
       width: '346px',
@@ -190,6 +216,15 @@ export class BasicListComponent implements OnInit {
           handler: ($event: Event) => {
             this.basicDataSource.splice(index, 1);
             results.modalInstance.hide();
+            // console.log(row);
+            this.backendService.deletePromotion(row["idPromotion"]).subscribe(
+              (res) => {
+                console.log("valid", res)
+              },
+              (err) => {
+                console.log(err);
+              }
+            )
           },
         },
         {
@@ -222,6 +257,12 @@ export class BasicListComponent implements OnInit {
     };
     this.pager.pageIndex = 1;
     this.getList();
+  }
+  
+  isFloat(value) {
+    const regex = /^[+]?[1-9]*\.?[0-9]+$/;
+    
+    return of(regex.test(value)).pipe(delay(500));
   }
 
   onSubmitted(e) {

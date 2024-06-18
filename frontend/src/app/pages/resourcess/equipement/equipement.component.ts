@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { EChartsOption } from 'echarts';
 
 @Component({
   selector: 'app-equipement',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./equipement.component.scss']
 })
 export class EquipementComponent {
-
+  
 }

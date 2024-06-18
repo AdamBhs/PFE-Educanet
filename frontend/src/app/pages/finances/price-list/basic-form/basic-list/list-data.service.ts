@@ -4,6 +4,7 @@ import { BackendCallsService } from 'src/app/@core/services/backend-calls.servic
 import { BasicListComponent } from './basic-list.component';
 
 export interface Item {
+  idArticle?: any;
   ArticleName?: string;
   ArticlePrice?: string;
   
@@ -51,8 +52,8 @@ export class ListDataService {
     );
   }
   
-  deleteArticleByName(name: String) {
-    this.backendService.deleteArticleByName(name).subscribe(
+  deleteArticleById(id: String) {
+    this.backendService.deleteArticleById(id).subscribe(
       (response) => {
         console.log('Article deleted successfully: ', response);
       },
@@ -83,6 +84,7 @@ export class ListDataService {
           const simplifiedArticles = articles.map(article => ({
             ArticleName: article.articleName,
             ArticlePrice: article.articlePrix,
+            idArticle: article.idArticle
           }));
 
           observer.next({

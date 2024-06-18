@@ -13,7 +13,7 @@
 
       <d-form-item>
         <d-form-label
-          [required]="false"
+          [required]="true"
           [hasHelp]="false"
           [helpTips]="'This is Agency name.'"
           >Agency</d-form-label
@@ -21,56 +21,57 @@
         <d-form-control>
           <d-select
             [options]="AgencyOptions"
-            [(ngModel)]="projectFormData.AgencyName"
+            [(ngModel)]="projectFormData.agencyName"
+            (valueChange)="isCategoryFilled($event); valuechangeAgence($event);"
             [name]="'AgencyName'"
             [placeholder]="'Select Agency'"
             [filterKey]="'name'"
             [valueKey]="'name'"
             [allowClear]="true"
-            [dValidateRules]="[{ required: false }]"
+            [dValidateRules]="[{ required: true }]"
           ></d-select>
         </d-form-control>
       </d-form-item>
-      <ng-container *ngIf="projectFormData.AgencyName !== null ">
 
         <d-form-item>
           <d-form-label
-            [required]="false"
+            [required]="true"
             [hasHelp]="false"
-            [helpTips]="'This is Agency name.'"
-            >Agency</d-form-label
+            >Category</d-form-label
           >
           <d-form-control>
             <d-select
-              [options]="AgencyOptions"
-              [(ngModel)]="projectFormData.AgencyName"
-              [name]="'AgencyName'"
-              [placeholder]="'Select Agency'"
+              [options]="ArticleOptions"
+              [(ngModel)]="projectFormData.category"
+              [name]="'category'"
+              (valueChange)="isCategoryFilled($event)"
+              [placeholder]="'Select Category'"
               [filterKey]="'name'"
               [valueKey]="'name'"
               [allowClear]="true"
-              [dValidateRules]="[{ required: false }]"
+              [dValidateRules]="[{ required: true }]"
             ></d-select>
           </d-form-control>
         </d-form-item>
 
         <d-form-item>
           <d-form-label
-            [required]="false"
+            [required]="true"
             [hasHelp]="false"
             [helpTips]="'This is Agency name.'"
-            >Agency</d-form-label
+            >Article Name</d-form-label
           >
           <d-form-control>
             <d-select
-              [options]="AgencyOptions"
-              [(ngModel)]="projectFormData.AgencyName"
-              [name]="'AgencyName'"
-              [placeholder]="'Select Agency'"
+              [options]="articleNames"
+              [(ngModel)]="projectFormData.articleName"
+              [name]="'articleName'"
+              [placeholder]="'Select Article Name'"
               [filterKey]="'name'"
+              [disabled]="displayArticleName"
               [valueKey]="'name'"
               [allowClear]="true"
-              [dValidateRules]="[{ required: false }]"
+              [dValidateRules]="[{ required: true }]"
             ></d-select>
           </d-form-control>
         </d-form-item>
@@ -80,21 +81,21 @@
         <d-form-item>
           <d-form-label
             [required]="true"
-            >Customer Code</d-form-label
+            >New Price</d-form-label
           >
           <d-form-control>
             <input
               dTextInput
               autocomplete="off"
-              name="customerCode"
-              placeholder="Customer Code"
-              [(ngModel)]="projectFormData.CustomerCode"
+              name="newPrice"
+              placeholder="New Price"
+              [(ngModel)]="projectFormData.newPrice"
               [dValidateRules]="{
                 validators: [{ required: true }],
                 asyncValidators: [
                   {
-                    sameName: this.checkName.bind(this),
-                    message: 'Customer card does not exist.'
+                    sameName: this.isFloat.bind(this),
+                    message: 'Wrong input.'
                   }
                 ]
               }"
@@ -102,37 +103,11 @@
           </d-form-control>
         </d-form-item>
 
+        
         <d-form-item>
           <d-form-label [required]="true">date interval</d-form-label>
           <d-form-control>
-            <div class="devui-input-group devui-dropdown-origin">
-              <input
-                class="devui-input devui-form-control"
-                placeholder="y/MM/dd  -  y/MM/dd"
-                name="dp"
-                [(ngModel)]="projectFormData.projectCycleTime"
-                (click)="dateRangePicker.toggle()"
-                autocomplete="off"
-                dDateRangePicker
-                #dateRangePicker="dateRangePicker"
-                (selectedRangeChange)="getValue($event)"
-                [hideOnRangeSelected]="true"
-                [dValidateRules]="[{ required: true }]"
-              />
-              <div
-                *ngIf="everyRange(projectFormData.projectCycleTime)"
-                class="devui-input-group-addon close-icon-wrapper"
-                (click)="dateRangePicker.clearAll()"
-              >
-                <i class="icon icon-close"></i>
-              </div>
-              <div
-                class="devui-input-group-addon"
-                (click)="dateRangePicker.toggle()"
-              >
-                <i class="icon icon-calendar"></i>
-              </div>
-            </div>
+            <d-range-type-picker [ProjectFormData]="projectFormData"></d-range-type-picker>
           </d-form-control>
         </d-form-item>
 
@@ -143,7 +118,6 @@
             [title]="projectForm.errorMessage || ''"
             circled="true"
             style="margin-right: 8px"
-            [showLoading]="projectForm.pending"
             dFormSubmit
             [dFormSubmitData]="'submit-button'"
           >
@@ -151,11 +125,9 @@
           </d-button>
         </d-form-operation>
 
-        
-      </ng-container>
 </form>
 
-<ng-container *ngIf="projectFormData.AgencyName !== null ">
+<ng-container >
   <da-basic-list></da-basic-list>
 </ng-container>
 

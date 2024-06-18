@@ -43,13 +43,13 @@
             [scrollable]="true"
           >
             
-            <d-column field="Categoria" header="Categoria" [width]="'200px'">
+            <d-column field="Categoria" header="Categoria" [width]="'150px'">
               <d-cell>
                 <ng-template let-cellItem="cellItem">
                   <span
                     [title]="cellItem"
                     class="over-flow-ellipsis"
-                    [style.width]="'300px'"
+                    [style.width]="'150px'"
                   >
                     {{ cellItem }}
                   </span>
@@ -57,10 +57,16 @@
               </d-cell>
             </d-column>
 
-            <d-column field="Descrizione" header="Descrizione" [width]="'200px'">
+            <d-column field="Descrizione" header="Descrizione" [width]="'250px'">
               <d-cell>
                 <ng-template let-cellItem="cellItem">
+                  <span
+                    [title]="cellItem"
+                    class="over-flow-ellipsis"
+                    [style.width]="'250px'"
+                  >
                   {{ cellItem }}
+                  </span>
                 </ng-template>
               </d-cell>
             </d-column>
@@ -103,7 +109,7 @@
                       icon="icon-delete"
                       bsStyle="text-dark"
                       title="delete"
-                      (click)="deleteRow(rowIndex)"
+                      (click)="deleteRow(rowItem, rowIndex)"
                     ></d-button>
                   </div>
                 </ng-template>

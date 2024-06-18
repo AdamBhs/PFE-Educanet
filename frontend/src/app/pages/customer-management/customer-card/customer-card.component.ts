@@ -62,15 +62,9 @@ export class CustomerCardComponent implements OnInit {
           this.customer.name = data["name"];
           this.customer.numTelp = data["numTelp"];
           this.customer.pinCode = data["pinCode"];
-          console.log(this.customer);
         }
       )
       
-      //  this.backendService.getCustomers().subscribe(
-      //   (data) => {
-      //     console.log(data);
-      //   }
-      // )
       
     } else {
       this.validCode = false;

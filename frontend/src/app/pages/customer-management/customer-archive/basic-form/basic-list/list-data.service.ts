@@ -53,7 +53,6 @@ export class ListDataService{
   }
  
   getListData(pager: ListPager): Observable<any> {
-
     const observable = new Observable((observer) => {
       this.backendService.getCustomerArchive(
         this.projectFormData.CustomerCode,

@@ -42,7 +42,6 @@ export class BasicFormComponent {
     this.projectFormData.numAgence = data["id"];
     this.listDataService.getNumAgence(data["id"]);
    
-    this.basicList.getList()
 
     if (!this.firstCall) {
       this.basicList.reset();
@@ -56,15 +55,16 @@ export class BasicFormComponent {
      this.projectFormData["numAgence"],
      this.projectFormData["description"], 
      this.projectFormData["title"]
+    ).subscribe(
+      (res) => {
+        console.log("valid : ", res);
+      },
+      (err) => {
+        console.log("error: ", err);
+      }
     );
 
-    this.basicList.getList()
-
-    if (!this.firstCall) {
-      this.basicList.reset();
-    } else {
-      this.firstCall = false;
-    }
+  
   }
 
   isString(value) {
@@ -77,7 +77,7 @@ export class BasicFormComponent {
     if (valid) {
       this.projectFormData.Submited = true;
       this.addNotification();
-
+      
       
     } else {
       // error tip

@@ -23,8 +23,8 @@ public class PromotionService {
     @Autowired
     private PromotionRepo promotionRepo;
 
-    public List<Promotion> getCustomersPromotions(Integer agenceNum) {
-        return this.promotionRepo.getPromotionsCustomers(agenceNum);
+    public List<Map<String, Object>> getCustomersPromotions(Integer agenceNum) {
+        return this.promotionRepo.getCustomersPromotions(agenceNum);
     }
 
     public List<Map<String, Object>>  getPromotions(Integer agenceNum) {

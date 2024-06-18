@@ -1,5 +1,5 @@
 
-  <d-data-table  [dataSource]="basicDataSource" [scrollable]="true" [tableWidthConfig]="tableWidthConfig" [tableOverflowType]="'overlay'">
+  <d-data-table  [dataSource]="basicDataSource" [scrollable]="false" [tableWidthConfig]="tableWidthConfig" [tableOverflowType]="'overlay'">
     <thead dTableHead>
       <tr dTableRow>
         <th dHeadCell *ngFor="let colOption of dataTableOptions.columns">{{ colOption.header }}</th>
@@ -15,7 +15,7 @@
             >
               {{ rowItem[colOption.field] }}
             </d-button>
-            <!-- Otherwise, render the regular text -->
+            
             <ng-container *ngIf="colOption.field !== 'Etat'">
               {{ rowItem[colOption.field] }}
             </ng-container>

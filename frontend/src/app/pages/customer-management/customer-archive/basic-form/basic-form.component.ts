@@ -36,8 +36,8 @@ export class BasicFormComponent{
   ) {}
 
   AgencyOptions = [
-    { id: '1', name: 'Bazzano' },
-    { id: '2', name: 'Carpi' },
+    { id: '1', name: 'Carpi' },
+    { id: '2', name: 'Bazzano' },
     { id: '3', name: 'Modena' },
     { id: '4', name: 'Soliera' },
   ];

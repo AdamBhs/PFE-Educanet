@@ -23,8 +23,8 @@ public interface ArticleRepo extends JpaRepository<Article, Integer> {
     String getArticleByName(@Param("nameArticle") String nameArticle);
     @Modifying
     @Transactional
-    @Query(value="Delete From Article where article_name = :nameArticle", nativeQuery = true)
-    void deleteArticleByName(@Param("nameArticle") String nameArticle);
+    @Query(value="Delete From Article where id_article = :idArticle", nativeQuery = true)
+    void deleteArticleById(@Param("idArticle") int idArticle);
 
     @Modifying
     @Transactional

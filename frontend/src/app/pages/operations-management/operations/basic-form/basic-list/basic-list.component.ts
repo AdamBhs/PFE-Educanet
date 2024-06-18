@@ -6,9 +6,10 @@ import {
   ViewChild,
 } from '@angular/core';
 import { DialogService, FormLayout, TableWidthConfig } from 'ng-devui';
-import { Subscription } from 'rxjs';
-import { FormConfig } from 'src/app/@shared/components/admin-form';
-import { ListDataService, Item } from './list-data.service';
+import { Subscription, delay } from 'rxjs';
+import { Observable, of as observableOf } from 'rxjs';
+import { Item, ListPager } from './interfaces';
+import { BackendCallsService } from 'src/app/@core/services/backend-calls.service';
 
 @Component({
   selector: 'da-basic-list',
@@ -36,52 +37,37 @@ export class BasicListComponent implements OnInit {
 
   tableWidthConfig: TableWidthConfig[] = [
     {
-      field: 'Categoria',
+      field: 'date',
       width: '200px',
     },
     {
-      field: 'Descrizione',
+      field: 'name_of_client',
       width: '200px',
     },
     {
-      field: 'Prezzo',
+      field: 'payement_type',
       width: '200px'
     },
     {
-      field: 'Inizio',
+      field: 'quantity',
       width: '200px',
     },
     {
-      field: 'Fine',
+      field: 'operation_number',
       width: '200px',
     },
     {
-      field: 'Actions',
+      field: 'payement_date',
       width: '100px',
     },
   ];
 
   basicDataSource: Item[] = [];
-
-  formConfig: FormConfig = {
-    layout: FormLayout.Horizontal,
-    items: [
-
-      {
-        label: 'Categoria',
-        prop: 'Categoria',
-        type: 'input',
-        required: true,
-        rule: {
-          validators: [
-            { required: true },
-          ],
-          
-        },
-      },
-      
-    ],
-    labelSize: '',
+  projectFormData = {
+    numAgence: null,
+    AgencyName: null,
+    intervalTime: [null, null],
+    operationCycleTime: [null, null],
   };
 
   formData = {};
@@ -96,28 +82,45 @@ export class BasicListComponent implements OnInit {
     pageSize: 10,
   };
 
+  numAgence: any;
+
   busy: Subscription;
 
   @ViewChild('EditorTemplate', { static: true })
   EditorTemplate: TemplateRef<any>;
 
   constructor(
-    private listDataService: ListDataService,
     private dialogService: DialogService,
+    private backendService: BackendCallsService,
     private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
-    this.getList();
   }
 
   search() {
     this.getList();
   }
 
-  getList() {
-    this.busy = this.listDataService
-      .getListData(this.pager)
+  private pagerList(data, pager) {
+    return data.slice(
+      pager.pageSize * (pager.pageIndex - 1),
+      pager.pageSize * pager.pageIndex
+    );
+  }
+
+  getNumAgence(value) {
+    this.projectFormData.numAgence = value;
+  }
+
+  getProjectFormData(value) {
+
+    this.projectFormData = value
+    console.log(this.projectFormData.numAgence);
+  }
+
+  getListByDate() {
+    this.busy = this.getListDataByDate(this.pager)
       .subscribe((res) => {
         const data = JSON.parse(JSON.stringify(res.pageList));
         this.basicDataSource = data;
@@ -125,20 +128,75 @@ export class BasicListComponent implements OnInit {
       });
   }
 
-  editRow(row, index) {
-    this.editRowIndex = index;
-    this.formData = row;
-    this.editForm = this.dialogService.open({
-      id: 'edit-dialog',
-      width: '600px',
-      maxHeight: '600px',
-      title: 'Editor',
-      showAnimate: false,
-      contentTemplate: this.EditorTemplate,
-      backdropCloseable: true,
-      onClose: () => {},
-      buttons: [],
+  getListDataByDate(pager: ListPager): Observable<any> {
+
+    const observable = new Observable((observer) => {
+      this.backendService.getOperationsByDate(
+        this.projectFormData.numAgence,
+        this.projectFormData.intervalTime[0],
+        this.projectFormData.intervalTime[1]
+      ).subscribe(
+        (promotions) => {
+          const simplifiedPromotions = promotions.map(promotion => ({
+            idPromotion: promotion.id,
+            Categoria: promotion.category,
+            Descrizione: promotion.nameArticle,
+            Prezzo: promotion.newprix,
+            Inizio: promotion.startDate,
+            Fine: promotion.endDate
+          }));
+
+          observer.next({
+            pageList: this.pagerList(simplifiedPromotions, pager),
+            total: promotions.length,
+          });
+          observer.complete();
+        },
+        (error) => {
+          observer.error(error);
+        }
+      );
     });
+    return observable;
+  }
+
+  getList() {
+    this.busy = this.getListData(this.pager)
+      .subscribe((res) => {
+        const data = JSON.parse(JSON.stringify(res.pageList));
+        this.basicDataSource = data;
+        this.pager.total = res.total;
+      });
+  }
+
+  getListData(pager: ListPager): Observable<any> {
+
+    const observable = new Observable((observer) => {
+      this.backendService.getOperations(
+        this.projectFormData.numAgence
+      ).subscribe(
+        (operations) => {
+          const operationsList = operations.map(operation => ({
+            date: operation.date,
+            name_of_client: operation.customer_name,
+            payement_type: operation.pay_type,
+            quantity: operation.quantity,
+            operation_number: operation.operation_number,
+            payement_date: operation.payement_date
+          }));
+
+          observer.next({
+            pageList: this.pagerList(operationsList, pager),
+            total: operations.length,
+          });
+          observer.complete();
+        },
+        (error) => {
+          observer.error(error);
+        }
+      );
+    });
+    return observable;
   }
 
   deleteRow(index) {

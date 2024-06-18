@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BasicFormComponent } from './basic-form.component';
-import { SelectModule, CheckBoxModule, DatepickerModule } from 'ng-devui';
+import { SelectModule, CheckBoxModule, EditableSelectModule } from 'ng-devui';
 import { SharedModule } from 'src/app/@shared/shared.module';
 import { BasicListModule } from './basic-list/basic-list.module';
+import { DateRangePickerModule } from 'src/app/pages/components/range-picker/date-picker.module';
+
+
 @NgModule({
   declarations: [BasicFormComponent],
   imports: [
@@ -11,8 +14,9 @@ import { BasicListModule } from './basic-list/basic-list.module';
     FormsModule,
     SelectModule,
     CheckBoxModule,
-    DatepickerModule,
     BasicListModule,
+    DateRangePickerModule,
+    EditableSelectModule
   ],
   exports: [BasicFormComponent],
 })

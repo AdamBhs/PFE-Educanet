@@ -31,13 +31,9 @@ export class EchartsComponent implements AfterViewInit, OnChanges, OnDestroy, On
   @Input() options: any;
   @Input() notMerge: boolean;
   @Input() lazyUpdate: boolean;
-  /**
-   * echarts 主题
-   */
+
   @Input() theme: string | Object;
-  /**
-   * 当echarts初始化完成后，会返回echarts实例
-   */
+
   @Output() chartReady: EventEmitter<any> = new EventEmitter<any>();
   @Input() width = '100%';
   @Input() height = '400px';
@@ -52,7 +48,7 @@ export class EchartsComponent implements AfterViewInit, OnChanges, OnDestroy, On
   resizeSub: any;
   textColor = DEFAULT_TEXT_COLOR;
   linecolor: string;
-  // 主题色色盘
+
   themeColorArray = [
     '#5E7CE0', '#6CBFFF', '#50D4AB', '#A6DD82', '#FAC20A', '#FA9841', '#F66F6A', '#F3689A', '#A97AF8', '#207AB3', '#169E6C', '#7EBA50',
     '#B58200', '#B54E04', '#344899', '#572DB3', '#FFD4E3', '#B8E0FF', '#ACF2DC', '#D8FCC0', '#FFE794', '#FFD0A6', '#D8C2FF', '#BECCFA',

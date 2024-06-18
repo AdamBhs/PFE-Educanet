@@ -1,10 +1,10 @@
 export interface Item {
     Categoria?: string;
-    ArticleType?: string;
     Descrizione?: string;
     Prezzo?: string;
     Inizio?: string;
     Fine?: string;
+    idPromotion?: string;
     
     assignee?: string;
     status?: string;

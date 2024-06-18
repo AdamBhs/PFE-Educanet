@@ -2,11 +2,11 @@ import zhCN from "../assets/i18n/zh-CN";
 import enUS from "../assets/i18n/en-US";
 
 export const LANGUAGES = [
-  {
-    code: 'zh-cn',
-    lang: '简体中文',
-    prefix: 'CN',
-  },
+  // {
+  //   code: 'zh-cn',
+  //   lang: 'Italye',
+  //   prefix: 'CN',
+  // },
   {
     code: 'en-us',
     lang: 'English',
